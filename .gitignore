@@ -1,5 +1,9 @@
 HELP.md
 target/
+main/resources/application.properties
+application.properties
+main/resources/auxiliar.properties
+auxiliar.properties
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -28,8 +32,5 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
-application.properties
-auxiliar.properties
-
 ### VS Code ###
 .vscode/
