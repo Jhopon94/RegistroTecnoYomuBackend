@@ -9,6 +9,8 @@ import com.registroTY.principal.services.TipoItemServicioInterfaz;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,4 +25,9 @@ public class TipoItemController {
         return servicioTipoItem.ListaTiposItem();
     }
     
+    @PostMapping("/TiposItem")
+    public void GuardarTipoItem(@RequestBody TipoItem tipoItem){
+    
+        servicioTipoItem.GuardarTipoItem(tipoItem);
+    }
 }

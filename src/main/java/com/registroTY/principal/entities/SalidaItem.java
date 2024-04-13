@@ -11,7 +11,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Immutable;
 
+@Immutable
 @Entity
 @Table(name = "salidaItem")
 @Getter @Setter
@@ -20,9 +22,9 @@ import lombok.ToString;
 public class SalidaItem {
     
     @Id
-    private String id;
-    private String idEquipo;
-    private String idItem;
+    private int id;
+    private int idEquipo;
+    private int idItem;
     private String descripcion;
     private int cantidad;
     private Date fechaUso;

@@ -26,4 +26,10 @@ public class EntradaItemServicio implements EntradaItemServicioInterfaz {
         List<EntradaItem> listaEntradasItem = (List<EntradaItem>) repoEntradaItem.findAll();
         return listaEntradasItem;
     }
+
+    @Override
+    public void GuardarEntradaItem(EntradaItem entradaItem) {
+        
+        repoEntradaItem.save(entradaItem);
+    }
 }

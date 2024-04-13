@@ -20,8 +20,8 @@ import lombok.ToString;
 public class Detalles {
     
     @Id
-    private String id;
-    private String idEquipo;
+    private int id;
+    private int idEquipo;
     private String descripcion;
     private String precio;
 }

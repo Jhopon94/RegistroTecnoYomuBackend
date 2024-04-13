@@ -11,4 +11,10 @@ import java.util.List;
 public interface DetallesServicioInterfaz {
     
     List<Detalles> ListaDetalles();
+    
+    void EliminarDetalle(int id);
+    
+    void GuardarDetalle(Detalles detalle);
+    
+    void GuardarVariosDetalles(List<Detalles> detalles);
 }

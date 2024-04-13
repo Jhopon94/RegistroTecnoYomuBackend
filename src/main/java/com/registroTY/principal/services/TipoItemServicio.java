@@ -26,4 +26,10 @@ public class TipoItemServicio implements TipoItemServicioInterfaz {
         List<TipoItem> listaTiposItem = (List<TipoItem>) repoTipoItem.findAll();
         return listaTiposItem;
     }
+
+    @Override
+    public void GuardarTipoItem(TipoItem tipoItem) {
+        System.out.println(tipoItem.getId());
+        repoTipoItem.save(tipoItem);
+    }
 }

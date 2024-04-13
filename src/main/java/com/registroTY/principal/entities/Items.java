@@ -21,7 +21,7 @@ import lombok.ToString;
 public class Items {
     
     @Id
-    private String id;
+    private int id;
     private String nombre;
     private String tipoItem;
     private String descripcion;

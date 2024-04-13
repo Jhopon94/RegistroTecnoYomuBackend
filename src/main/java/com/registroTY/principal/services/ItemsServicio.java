@@ -26,4 +26,10 @@ public class ItemsServicio implements ItemsServicioInterfaz {
         List<Items> listaItems = (List<Items>) repoItems.findAll();
         return listaItems;
     }
+
+    @Override
+    public void GuardarItem(Items item) {
+        
+        
+    }
 }

@@ -11,4 +11,6 @@ import java.util.List;
 public interface TipoItemServicioInterfaz {
     
     List<TipoItem> ListaTiposItem();
+    
+    void GuardarTipoItem(TipoItem tipoItem);
 }

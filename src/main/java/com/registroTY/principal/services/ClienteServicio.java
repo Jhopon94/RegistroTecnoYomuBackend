@@ -26,4 +26,10 @@ public class ClienteServicio implements ClienteServicioInterfaz {
         List<Cliente> listaClientes = (List<Cliente>) repoCliente.findAll();
         return listaClientes;
     }
+    
+    @Override
+    public void GuardarCliente(Cliente cliente){
+    
+        repoCliente.save(cliente);
+    }
 }

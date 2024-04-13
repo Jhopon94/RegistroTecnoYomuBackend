@@ -11,4 +11,6 @@ import java.util.List;
 public interface SalidaItemServicioInterfaz {
     
     List<SalidaItem> ListaSalidasItem();
+    
+    void GuardarSalidaItem(SalidaItem salidaItem);
 }

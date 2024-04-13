@@ -11,4 +11,6 @@ import java.util.List;
 public interface ClienteServicioInterfaz {
     
     List<Cliente> ListaClientes();
+    
+    void GuardarCliente(Cliente cliente);
 }

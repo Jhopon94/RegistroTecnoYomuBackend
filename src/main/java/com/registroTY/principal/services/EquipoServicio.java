@@ -26,4 +26,16 @@ public class EquipoServicio implements EquipoServicioInterfaz {
         List<Equipo> listaEquipos = (List<Equipo>) repoEquipo.findAll();
         return listaEquipos;
     }
+
+    @Override
+    public void EliminarEquipo(int id) {
+        
+        repoEquipo.deleteById(id);
+    }
+
+    @Override
+    public void GuardarEquipo(Equipo equipo) {
+        
+        repoEquipo.save(equipo);
+    }
 }

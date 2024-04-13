@@ -21,7 +21,7 @@ import lombok.ToString;
 public class Equipo {
     
     @Id
-    private String id;
+    private int id;
     private int idCliente;
     private String tipoIngreso;
     private String condicionesFisicasRecibidas;

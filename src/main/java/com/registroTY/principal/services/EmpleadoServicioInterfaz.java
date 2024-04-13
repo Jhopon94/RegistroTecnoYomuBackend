@@ -11,4 +11,6 @@ import java.util.List;
 public interface EmpleadoServicioInterfaz {
     
     List<Empleado> ListaEmpleados();
+    
+    void GuardarEmpleado(Empleado empleado);
 }

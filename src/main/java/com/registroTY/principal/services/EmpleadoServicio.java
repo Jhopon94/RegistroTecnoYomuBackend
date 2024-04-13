@@ -26,4 +26,10 @@ public class EmpleadoServicio implements EmpleadoServicioInterfaz {
         List<Empleado> listaEmpleados = (List<Empleado>) repoEmpleado.findAll();
         return listaEmpleados;
     }
+
+    @Override
+    public void GuardarEmpleado(Empleado empleado) {
+        
+        repoEmpleado.save(empleado);
+    }
 }

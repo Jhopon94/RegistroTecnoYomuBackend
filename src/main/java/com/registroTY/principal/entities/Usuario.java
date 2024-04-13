@@ -21,7 +21,7 @@ import lombok.ToString;
 public class Usuario {
     
     @Id
-    private String id;
+    private int id;
     private int idEmpleado;
     private String nombreUsuario;
     private String contrasenia;

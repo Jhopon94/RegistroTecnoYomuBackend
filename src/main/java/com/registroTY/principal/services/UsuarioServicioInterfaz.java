@@ -11,4 +11,8 @@ import java.util.List;
 public interface UsuarioServicioInterfaz {
     
     List<Usuario> ListaUsuarios();
+    
+    void EliminarUsuario(int id);
+    
+    void GuardarUsuario(Usuario usuario);
 }

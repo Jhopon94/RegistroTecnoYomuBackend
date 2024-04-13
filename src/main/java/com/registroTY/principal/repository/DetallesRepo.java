@@ -11,6 +11,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DetallesRepo extends CrudRepository<Detalles, String>{ //Integer porque el id es int
+public interface DetallesRepo extends CrudRepository<Detalles, Integer>{ //Integer porque el id es int
     
 }

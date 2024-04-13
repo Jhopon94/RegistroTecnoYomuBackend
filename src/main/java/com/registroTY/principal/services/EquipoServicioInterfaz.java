@@ -11,4 +11,8 @@ import java.util.List;
 public interface EquipoServicioInterfaz {
     
     List<Equipo> ListaEquipos();
+    
+    void EliminarEquipo(int id);
+    
+    void GuardarEquipo(Equipo equipo);
 }

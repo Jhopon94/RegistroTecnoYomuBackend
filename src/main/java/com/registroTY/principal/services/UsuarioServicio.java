@@ -26,4 +26,15 @@ public class UsuarioServicio implements UsuarioServicioInterfaz {
         List<Usuario> listaUsuarios = (List<Usuario>) repoUsuario.findAll();
         return listaUsuarios;
     }
+
+    @Override
+    public void EliminarUsuario(int id) {
+        repoUsuario.deleteById(id);
+    }
+    
+    @Override
+    public void GuardarUsuario(Usuario usuario){
+        System.out.println("A guardar usuario");
+        repoUsuario.save(usuario);
+    }
 }

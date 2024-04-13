@@ -26,4 +26,10 @@ public class SalidaItemServicio implements SalidaItemServicioInterfaz {
         List<SalidaItem> listaSalidasItem = (List<SalidaItem>) repoSalidaItem.findAll();
         return listaSalidasItem;
     }
+
+    @Override
+    public void GuardarSalidaItem(SalidaItem salidaItem) {
+        
+        repoSalidaItem.save(salidaItem);
+    }
 }

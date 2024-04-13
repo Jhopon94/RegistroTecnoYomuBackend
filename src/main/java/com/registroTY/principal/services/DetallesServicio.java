@@ -26,4 +26,20 @@ public class DetallesServicio implements DetallesServicioInterfaz {
         List<Detalles> listaDetalles = (List<Detalles>) repoDetalles.findAll();
         return listaDetalles;
     }
+
+    @Override
+    public void EliminarDetalle(int id) {
+        repoDetalles.deleteById(id);
+    }
+
+    @Override
+    public void GuardarDetalle(Detalles detalle) {
+        repoDetalles.save(detalle);
+    }
+
+    @Override
+    public void GuardarVariosDetalles(List<Detalles> detalles) {
+        
+        repoDetalles.saveAll(detalles);
+    }
 }
