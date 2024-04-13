@@ -25,7 +25,6 @@ public class SalidaItem {
     private int id;
     private int idEquipo;
     private int idItem;
-    private String descripcion;
     private int cantidad;
     private Date fechaUso;
 }

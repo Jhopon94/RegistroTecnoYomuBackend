@@ -4,7 +4,6 @@
  */
 package com.registroTY.principal.controllers;
 
-import com.registroTY.principal.entities.Items;
 import com.registroTY.principal.entities.SalidaItem;
 import com.registroTY.principal.services.SalidaItemServicioInterfaz;
 import java.util.List;

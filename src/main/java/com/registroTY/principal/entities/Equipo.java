@@ -26,7 +26,7 @@ public class Equipo {
     private String tipoIngreso;
     private String condicionesFisicasRecibidas;
     private String daniosRecibido;
-    private Date partesInternasRecibido;
+    private String partesInternasRecibido;
     private int precioTotal;
     private String estadoEquipo;
     private int saldoPendiente;

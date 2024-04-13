@@ -30,6 +30,6 @@ public class ItemsServicio implements ItemsServicioInterfaz {
     @Override
     public void GuardarItem(Items item) {
         
-        
+        repoItems.save(item);
     }
 }

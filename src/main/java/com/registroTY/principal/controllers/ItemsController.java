@@ -28,7 +28,7 @@ public class ItemsController {
     
     @PostMapping("/Items")
     public void GuardarItems(@RequestBody Items items){
-    
+        System.out.println("A guardar el item " + items.getNombre());
         servicioItems.GuardarItem(items);
     }
 }

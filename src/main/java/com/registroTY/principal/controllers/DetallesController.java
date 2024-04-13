@@ -29,13 +29,10 @@ public class DetallesController {
     }
 
     @PostMapping("/Detalles")
-    public void GuardarDetalle(@RequestBody Object detalle) {
+    public void GuardarDetalle(@RequestBody List<Detalles> detalles) {
 
-        if (detalle instanceof List<?>) {
-            servicioDetalles.GuardarVariosDetalles((List<Detalles>)detalle);
-        } else if (detalle instanceof Detalles detalles) {
-            servicioDetalles.GuardarDetalle(detalles);
-        }
+            System.out.println("Es una lista de detalles...");
+            servicioDetalles.GuardarVariosDetalles(detalles);
     }
 
     @DeleteMapping("/Detalles/{id}")
