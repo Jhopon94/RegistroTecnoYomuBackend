@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+//////Controlador Principal del ojeto Usuario////////////////////
 @RestController
 public class UsuarioController {
     

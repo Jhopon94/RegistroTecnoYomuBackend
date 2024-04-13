@@ -13,7 +13,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Immutable;
 
-@Immutable
+@Immutable //Para que no se pueda modificar una vez creado
 @Entity
 @Table(name = "tipoItem")
 @Getter @Setter
