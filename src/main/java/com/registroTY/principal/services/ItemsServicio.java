@@ -6,24 +6,24 @@ package com.registroTY.principal.services;
 
 /////////////// Aquí va la lógica de Negocio ///////////////////
 
-import com.registroTY.principal.entities.Cliente;
-import com.registroTY.principal.repository.ClienteRepo;
+import com.registroTY.principal.entities.Items;
+import com.registroTY.principal.repository.ItemsRepo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class ClienteServicio implements ClienteServicioInterfaz {
+public class ItemsServicio implements ItemsServicioInterfaz {
     
     @Autowired
-    private ClienteRepo repoCliente;
+    private ItemsRepo repoItems;
     
     @Override
-    public List<Cliente> ListaClientes(){
+    public List<Items> ListaItems(){
         
         System.out.println("Vamos a ejecutar la consulta...");
-        List<Cliente> listaClientes = (List<Cliente>) repoCliente.findAll();
-        return listaClientes;
+        List<Items> listaItems = (List<Items>) repoItems.findAll();
+        return listaItems;
     }
 }
