@@ -8,6 +8,9 @@ package com.registroTY.principal.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,9 +25,13 @@ import lombok.ToString;
 public class Cliente {
     
     @Id
+    @NotNull(message="Debe especificarse un id!")
     private int id;
+    @NotBlank(message="Debe especificarse un nombre!")
     private String nombre;
+    @NotBlank(message="Debe especificarse un número de celular!")
     private String celular;
+    @Email
     private String correo;
     private String direccion;
     private Date fechaRegistro;

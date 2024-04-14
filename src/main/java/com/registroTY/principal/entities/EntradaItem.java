@@ -5,8 +5,11 @@
 package com.registroTY.principal.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,10 +26,15 @@ import org.hibernate.annotations.Immutable;
 public class EntradaItem {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotNull(message="Debe especificarse un id del ítem entrante!")
     private int idItem;
+    @NotNull(message="Debe especificarse la cantidad de items entrantes!")
     private int cantidad;
+    @NotNull(message="Debe calcularse el total!")
     private int precioTotal;
+    @NotNull(message="Debe especificarse el costo unitario!")
     private int costoUnitario;
     private Date fechaCompra;
 }

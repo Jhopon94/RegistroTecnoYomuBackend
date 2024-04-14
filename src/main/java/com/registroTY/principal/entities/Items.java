@@ -4,9 +4,14 @@
  */
 package com.registroTY.principal.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,10 +26,16 @@ import lombok.ToString;
 public class Items {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotBlank(message="Debe especificarse un nombre de ítem!")
+    @Column(unique = true) //estblecer unico a nivel de backend también
     private String nombre;
+    @NotBlank(message="Debe especificarse el tipo de ítem!")
     private String tipoItem;
+    @NotBlank(message="Debe especificarse una descripción!")
     private String descripcion;
+    @NotNull(message="Debe calcularse el saldo!")
     private int saldo;
     private Date fechaCreacion;
 }

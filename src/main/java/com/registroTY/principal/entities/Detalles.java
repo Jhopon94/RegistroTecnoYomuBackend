@@ -5,8 +5,12 @@
 package com.registroTY.principal.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,8 +24,11 @@ import lombok.ToString;
 public class Detalles {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotNull(message="Debe especificarse el id del equipo mediante lógica!")
     private int idEquipo;
+    @NotBlank(message="Debe especificarse una descripción!")
     private String descripcion;
     private String precio;
 }

@@ -4,8 +4,11 @@
  */
 package com.registroTY.principal.entities;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,9 +25,13 @@ import org.hibernate.annotations.Immutable;
 public class SalidaItem {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotNull(message="Debe especificarse el id del equipo donde se usó el ítem!")
     private int idEquipo;
+    @NotNull(message="Debe especificarse el id del ítem en cuestión!")
     private int idItem;
+    @NotNull(message="Debe especificarse la cantidad de tiems que salen!")
     private int cantidad;
     private Date fechaUso;
 }
