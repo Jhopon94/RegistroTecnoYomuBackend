@@ -22,14 +22,23 @@ public class EmpleadoServicio implements EmpleadoServicioInterfaz {
     @Override
     public List<Empleado> ListaEmpleados(){
         
-        System.out.println("Vamos a ejecutar la consulta...");
+        System.out.println("Consultando lista de empleados...");
+        try {
         List<Empleado> listaEmpleados = (List<Empleado>) repoEmpleado.findAll();
         return listaEmpleados;
+        } catch (Exception e) {
+            System.out.println("Error al obtener lista de empleados por: " + e);
+            return null;
+        }
     }
 
     @Override
     public void GuardarEmpleado(Empleado empleado) {
-        
+        System.out.println("Guardando empleado...");
+        try {
         repoEmpleado.save(empleado);
+        } catch (Exception e) {
+            System.out.println("Error al guardar empleado por : " + e);
+        }
     }
 }

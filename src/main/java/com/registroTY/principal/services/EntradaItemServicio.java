@@ -22,14 +22,24 @@ public class EntradaItemServicio implements EntradaItemServicioInterfaz {
     @Override
     public List<EntradaItem> ListaEntradaItem(){
         
-        System.out.println("Vamos a ejecutar la consulta...");
+        System.out.println("Consultando lista de las entradas de los items...");
+        try {
         List<EntradaItem> listaEntradasItem = (List<EntradaItem>) repoEntradaItem.findAll();
         return listaEntradasItem;
+        } catch (Exception e) {
+            System.out.println("Error al obtener lista de entradas de items por: " + e);
+            return null;
+        }
     }
 
     @Override
     public void GuardarEntradaItem(EntradaItem entradaItem) {
         
+        System.out.println("Guardando entrada de item...");
+        try {
         repoEntradaItem.save(entradaItem);
+        } catch (Exception e) {
+            System.out.println("Error al guardar entrada de ítem por: " + e);
+        }
     }
 }

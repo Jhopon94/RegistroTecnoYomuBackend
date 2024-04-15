@@ -22,14 +22,23 @@ public class TipoItemServicio implements TipoItemServicioInterfaz {
     @Override
     public List<TipoItem> ListaTiposItem(){
         
-        System.out.println("Vamos a ejecutar la consulta...");
+        System.out.println("Consultando lista de ítems...");
+        try {
         List<TipoItem> listaTiposItem = (List<TipoItem>) repoTipoItem.findAll();
         return listaTiposItem;
+        } catch (Exception e) {
+            System.out.println("Error al consultar lista de tipos de ítem por: " + e);
+            return null;
+        }
     }
 
     @Override
     public void GuardarTipoItem(TipoItem tipoItem) {
-        System.out.println(tipoItem.getId());
+        System.out.println("Guardando tipo de item...");
+        try {
         repoTipoItem.save(tipoItem);
+        } catch (Exception e) {
+            System.out.println("Error al guardar tipo de ítem por: " + e);
+        }
     }
 }

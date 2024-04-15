@@ -22,14 +22,24 @@ public class SalidaItemServicio implements SalidaItemServicioInterfaz {
     @Override
     public List<SalidaItem> ListaSalidasItem(){
         
-        System.out.println("Vamos a ejecutar la consulta...");
+        System.out.println("Consultando lista de las salidas de items...");
+        try {
         List<SalidaItem> listaSalidasItem = (List<SalidaItem>) repoSalidaItem.findAll();
         return listaSalidasItem;
+        } catch (Exception e) {
+            System.out.println("Error al consultar lista de las salidas de ítems por: " + e);
+            return null;
+        }
     }
 
     @Override
     public void GuardarSalidaItem(SalidaItem salidaItem) {
         
+        System.out.println("Guardando salida de ítem...");
+        try {
         repoSalidaItem.save(salidaItem);
+        } catch (Exception e) {
+            System.out.println("Error al guardar salida de ítem por: " + e);
+        }
     }
 }

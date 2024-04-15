@@ -22,14 +22,24 @@ public class ItemsServicio implements ItemsServicioInterfaz {
     @Override
     public List<Items> ListaItems(){
         
-        System.out.println("Vamos a ejecutar la consulta...");
+        System.out.println("consultando lista de ítems...");
+        try {
         List<Items> listaItems = (List<Items>) repoItems.findAll();
         return listaItems;
+        } catch (Exception e) {
+            System.out.println("Error al consultar lita de ítems por: " + e);
+            return null;
+        }
     }
 
     @Override
     public void GuardarItem(Items item) {
         
+        System.out.println("Guardando ítem...");
+        try {
         repoItems.save(item);
+        } catch (Exception e) {
+            System.out.println("Error al guardar ítem por: " + e);
+        }
     }
 }

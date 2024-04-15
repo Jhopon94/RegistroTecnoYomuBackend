@@ -22,20 +22,35 @@ public class EquipoServicio implements EquipoServicioInterfaz {
     @Override
     public List<Equipo> ListaEquipos(){
         
-        System.out.println("Vamos a ejecutar la consulta...");
+        System.out.println("Consultando lista de Equipos...");
+        try {
         List<Equipo> listaEquipos = (List<Equipo>) repoEquipo.findAll();
         return listaEquipos;
+        } catch (Exception e) {
+            System.out.println("Error al obtener lista de equipos por: " + e);
+            return null;
+        }
     }
 
     @Override
     public void EliminarEquipo(int id) {
         
+        System.out.println("Eliminando equipo...");
+        try {
         repoEquipo.deleteById(id);
+        } catch (Exception e) {
+            System.out.println("Error al eliminar equipo por: " + e);
+        }
     }
 
     @Override
     public void GuardarEquipo(Equipo equipo) {
         
+        System.out.println("Guardando equipo...");
+        try {
         repoEquipo.save(equipo);
+        } catch (Exception e) {
+            System.out.println("Error al guardar equipo por: " + e);
+        }
     }
 }

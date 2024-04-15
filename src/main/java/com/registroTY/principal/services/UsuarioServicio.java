@@ -22,19 +22,34 @@ public class UsuarioServicio implements UsuarioServicioInterfaz {
     @Override
     public List<Usuario> ListaUsuarios(){
         
-        System.out.println("Vamos a ejecutar la consulta...");
+        System.out.println("Consultando lista de usuarios...");
+        try {
         List<Usuario> listaUsuarios = (List<Usuario>) repoUsuario.findAll();
         return listaUsuarios;
+        } catch (Exception e) {
+            System.out.println("Error al obtener lista de usuarios por: " + e);
+            return null;
+        }
     }
 
     @Override
     public void EliminarUsuario(int id) {
+        System.out.println("Eliminando usuario...");
+        try {
+            
         repoUsuario.deleteById(id);
+        } catch (Exception e) {
+            System.out.println("Error al eliminar usuario por: " + e);
+        }
     }
     
     @Override
     public void GuardarUsuario(Usuario usuario){
-        System.out.println("A guardar usuario");
+        System.out.println("Guardando usuario...");
+        try {
         repoUsuario.save(usuario);
+        } catch (Exception e) {
+            System.out.println("");
+        }
     }
 }

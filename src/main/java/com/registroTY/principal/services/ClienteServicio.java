@@ -23,13 +23,23 @@ public class ClienteServicio implements ClienteServicioInterfaz {
     public List<Cliente> ListaClientes(){
         
         System.out.println("Vamos a ejecutar la consulta...");
+        try {
         List<Cliente> listaClientes = (List<Cliente>) repoCliente.findAll();
         return listaClientes;
+        } catch (Exception e) {
+            System.out.println("Error al encontrar lista de Clientes por: " + e);
+            return null;
+        }
     }
     
     @Override
     public void GuardarCliente(Cliente cliente){
     
-        repoCliente.save(cliente);
+        System.out.println("Guardando cliente...");
+        try {
+            repoCliente.save(cliente);
+        } catch (Exception e) {
+            System.out.println("Error al guardar cliente por: " + e);
+        }
     }
 }
