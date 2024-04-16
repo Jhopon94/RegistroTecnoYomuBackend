@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,6 +34,10 @@ public class ClienteController {
         //Este string spring lo envía automáticamente como respuesta al front
         RegistroCliente registrarCliente = new RegistroCliente(cliente, servicioCliente);
         return registrarCliente.RegistrarCliente();
-       
+    }
+    
+    @PutMapping("/Clientes")
+    public String ActualizarCliente(@RequestBody Cliente cliente){
+        return servicioCliente.GuardarCliente(cliente);
     }
 }
