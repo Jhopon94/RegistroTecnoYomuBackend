@@ -11,6 +11,8 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import java.util.Date;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,6 +28,7 @@ public class Cliente {
     
     @Id
     @NotNull(message="Debe especificarse un id!")
+    @Positive
     private int id;
     @NotBlank(message="Debe especificarse un nombre!")
     private String nombre;
@@ -36,5 +39,6 @@ public class Cliente {
     private String direccion;
     private Date fechaRegistro;
     @NotNull
+    @PositiveOrZero
     private int serviciosTomados;
 }

@@ -12,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import java.util.Date;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -29,6 +31,7 @@ public class Equipo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull(message="Debe especificarse el id del cliente!")
+    @Positive
     private int idCliente;
     @NotBlank(message="Debe especificarse el tipo de ingreso!")
     private String tipoIngreso;
@@ -40,14 +43,17 @@ public class Equipo {
     @NotBlank(message="Debe especificarse las aprtes internas con que ingresa!")
     private String partesInternasRecibido;
     @NotNull(message="Debe calcularse el total!")
+    @PositiveOrZero
     private int precioTotal;
     @NotBlank(message="Debe especificarse el estado del equipo!")
     private String estadoEquipo;
     @NotNull(message="Debe especificarse el saldo pendiente!")
+    @PositiveOrZero
     private int saldoPendiente;
     private Date fechaIngreso;
     private Date fechaSalida;
     @NotNull
+    @PositiveOrZero
     private int diasGarantia;
     
 }

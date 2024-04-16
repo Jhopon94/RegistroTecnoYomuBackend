@@ -7,9 +7,10 @@ package com.registroTY.principal.services;
 /////////////// Aquí va la lógica de Negocio ///////////////////
 
 import com.registroTY.principal.entities.Detalles;
-import com.registroTY.principal.logica.gestionEquipos.ProcesoRegistroImpl;
 import com.registroTY.principal.repository.DetallesRepo;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,18 +58,18 @@ public class DetallesServicio implements DetallesServicioInterfaz {
     }
 
     @Override
-    public ProcesoRegistroImpl GuardarVariosDetalles(List<Detalles> detalles) {
+    public Map<String, Object> GuardarVariosDetalles(List<Detalles> detalles) {
            System.out.println("Guardando varios detalles...");
-           ProcesoRegistroImpl resultado = new ProcesoRegistroImpl();
+           Map<String, Object> resultado = new HashMap<>();
            try {
             repoDetalles.saveAll(detalles);
-            resultado.setMensaje("Detales registrados correctamente");
-            resultado.setProcesoExitoso(true);
+            resultado.put("mensaje", "Detalles registrados correctamente");
+            resultado.put("procesoExitoso", true);
             return resultado;
         } catch (Exception e) {
                System.out.println("Erro al guardar lista de detalles por: " + e);
-               resultado.setMensaje("Error de apicación al registrar los detalles");
-               resultado.setProcesoExitoso(false);
+               resultado.put("mensaje", "Error de apicación al registrar los detalles");
+               resultado.put("procesoExitoso", false);
                return resultado;
         }
     }

@@ -9,6 +9,7 @@ import com.registroTY.principal.entities.Equipo;
 import com.registroTY.principal.services.DetallesServicioInterfaz;
 import com.registroTY.principal.services.EquipoServicioInterfaz;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,75 +23,46 @@ public class RegistroEquipo {
     private List<Detalles> detalles;
     private EquipoServicioInterfaz servicioEquipo;
     private DetallesServicioInterfaz servicioDetalles;
-    private Object[] listaObjetos;
+    //Creamos una variable para devolver respuesta con dos valores: string y booelan
+    Map<String, Object> resultado;
 
     ///// Constructor/////////////
-    public RegistroEquipo(Object[] contenedorObjetos, EquipoServicioInterfaz servicioEquipo, DetallesServicioInterfaz servicioDetalles) {
-        detalles = new ArrayList<>();
-        equipo = new Equipo();
+    public RegistroEquipo(Equipo equipo, List<Detalles> detalles, EquipoServicioInterfaz servicioEquipo, DetallesServicioInterfaz servicioDetalles) {
+        this.detalles = detalles;
+        this.equipo = equipo;
         this.servicioEquipo = servicioEquipo;
         this.servicioDetalles = servicioDetalles;
-        listaObjetos = contenedorObjetos;
+        resultado = new HashMap<>();
     }
 
     //Deevuelve un objeto que contiene mensaje de proceso y boolean de exito en operación!
-    public ProcesoRegistroImpl RegistrarEquipo() {
-        IdentificarObjetos(listaObjetos);
-        ProcesoRegistroImpl resultado = new ProcesoRegistroImpl();
-        ProcesoRegistroImpl resultadoEquipo = servicioEquipo.GuardarEquipo(equipo);
-        ProcesoRegistroImpl resultadoDetalles = servicioDetalles.GuardarVariosDetalles(detalles);
-        resultado.setMensaje(resultadoEquipo + " y " + resultadoDetalles);
-        if(resultadoEquipo.getProcesoExitoso() && resultadoDetalles.getProcesoExitoso()) resultado.setProcesoExitoso(true);
-        else resultado.setProcesoExitoso(false);
+    public Map<String, Object> RegistrarEquipo() {
+
+        //Obtenemos los resultados de registrar equipo
+        Map<String, Object> resultadoEquipo = servicioEquipo.GuardarEquipo(equipo);
+        //Solo se registrarán los detalles si se tuvo éxito registrando el equipo
+        if ((boolean) resultadoEquipo.get("procesoExitoso")) {
+
+            //Si se tuvo éxito registrando el equipo
+            
+            //Se registran los detalles y se obtiene el resultado
+            Map<String, Object> resultadoDetalles = servicioDetalles.GuardarVariosDetalles(detalles);
+            //Verificamos que se haya tenido éxito registrando los detalles.
+            if ((boolean) resultadoDetalles.get("procesoExitoso")) {
+                resultado.put("mensaje", "Equipo y detalles registrados satisfactoriamente");
+                resultado.put("procesoExitoso", true);
+            } else {
+                resultado.put("mensaje", resultadoDetalles.get("mensaje") + ". Equipo Registrado pero sin detalles, intenta editar los detalles desde el panel de gestión de equipos. ");
+                resultado.put("procesoExitoso", false);
+            }
+        } else {
+            resultado.put("mensaje", resultadoEquipo.get("mensaje") + " y sus detalles");
+            resultado.put("procesoExitoso", false);
+        }
+
         return resultado;
     }
 
-    private void IdentificarObjetos(Object[] listaObjetos) {
-
-        for (Object objeto : listaObjetos) {
-            if (objeto instanceof Map) { //Si el objeto se puede mapear
-                Map<String, Object> objetoConvertido = (Map<String, Object>) objeto; //Se convierte en Map cada objeto
-                String tipo = (String) objetoConvertido.get("tipo");
-                switch (tipo) {
-
-                    case "detalles" -> {
-                        //Encontramos el array de detalles y vamos a hacerle casting a array list que contiene MAPS primero
-                        //Se verifica que si sea convertible a ArrayList
-                        if(objetoConvertido.get("detalles") instanceof ArrayList){
-                            //Una vez Verificado
-                            ArrayList<Map<String, Object>> listaAuxiliar = (ArrayList<Map<String, Object>>) objetoConvertido.get("detalles");
-                            //Convertimos cada Map en un objeto Detalles
-                            for(Map<String, Object> objetoMap : listaAuxiliar){
-                                //Creamos un objeto detalle auxiliar en cada repaso para agregarlo a la lista de Detalles
-                                //incializada en el constructor
-                                Detalles detalleAux = new Detalles();
-                                detalleAux.setDescripcion((String)objetoMap.get("descripcion"));
-                                detalleAux.setIdEquipo((int) objetoMap.get("idEquipo"));
-                                detalleAux.setPrecio((int) objetoMap.get("precio"));
-                                //Una vez creado el objeto, lo agregamos a la lista
-                                detalles.add(detalleAux);
-                            }
-                            System.out.println("Convertido a lista de Detalles...");
-                            System.out.println("verificamos con: " + detalles.get(0).getDescripcion());
-                        }
-                        
-                    }
-
-                    case "equipo" -> {
-                        equipo.setIdCliente((int) objetoConvertido.get("idCliente"));
-                        equipo.setTipoIngreso((String) objetoConvertido.get("tipoIngreso"));
-                        equipo.setModelo((String) objetoConvertido.get("modelo"));
-                        equipo.setCondicionesFisicasRecibidas((String) objetoConvertido.get("condicionesFisicasRecibidas"));
-                        equipo.setDaniosRecibido((String) objetoConvertido.get("daniosRecibido"));
-                        equipo.setPartesInternasRecibido((String) objetoConvertido.get("partesInternasRecibido"));
-                        equipo.setEstadoEquipo((String) objetoConvertido.get("estadoEquipo"));
-                        equipo.setDiasGarantia((int) objetoConvertido.get("diasGarantia"));
-                        equipo.setPrecioTotal((int) objetoConvertido.get("precioTotal"));
-                        equipo.setSaldoPendiente((int) objetoConvertido.get("saldoPendiente"));
-                    }
-                }
-            }
-        }
-    }
+   
 
 }

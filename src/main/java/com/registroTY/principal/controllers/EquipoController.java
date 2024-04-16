@@ -4,13 +4,18 @@
  */
 package com.registroTY.principal.controllers;
 
+import com.registroTY.principal.entities.Detalles;
 import com.registroTY.principal.entities.Equipo;
-import com.registroTY.principal.logica.gestionEquipos.ProcesoRegistroImpl;
+import com.registroTY.principal.logica.gestionEquipos.ContEquipoDetallesImpl;
 import com.registroTY.principal.logica.gestionEquipos.RegistroEquipo;
 import com.registroTY.principal.services.DetallesServicioInterfaz;
 import com.registroTY.principal.services.EquipoServicioInterfaz;
+import jakarta.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,10 +39,22 @@ public class EquipoController {
     }
     
     @PostMapping("/Equipos")
-    public ProcesoRegistroImpl GuardarEquipo(@RequestBody Object[] contenedorObjetos){
+    public Map<String, Object> GuardarEquipo(@Valid @RequestBody ContEquipoDetallesImpl contenedorObjetos, BindingResult resultado){
+        
+        if(resultado.hasErrors()){
+            Map<String, Object> aux = new HashMap<>();
+            aux.put("mensaje", "Hay algún dato incorrecto");
+            aux.put("procesoExitoso", false);
+            return aux;
+        }else{
+            Equipo equipo = contenedorObjetos.getEquipo();
+            List<Detalles> detalles = contenedorObjetos.getDetalles();
     
-        RegistroEquipo registrarEquipo = new RegistroEquipo(contenedorObjetos, servicioEquipo, servicioDetalles);
-        return registrarEquipo.RegistrarEquipo();
+            RegistroEquipo registrarEquipo = new RegistroEquipo(equipo, detalles, servicioEquipo, servicioDetalles);
+            return registrarEquipo.RegistrarEquipo();
+        }
+        
+        
     }
     
     @DeleteMapping("/Equipos/{id}")

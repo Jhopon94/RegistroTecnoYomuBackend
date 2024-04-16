@@ -5,8 +5,8 @@
 package com.registroTY.principal.services;
 
 import com.registroTY.principal.entities.Detalles;
-import com.registroTY.principal.logica.gestionEquipos.ProcesoRegistroImpl;
 import java.util.List;
+import java.util.Map;
 
 ///////Este interfaz es solo para que se vea mas ordenado y bonito ////////////
 public interface DetallesServicioInterfaz {
@@ -17,5 +17,5 @@ public interface DetallesServicioInterfaz {
     
     void GuardarDetalle(Detalles detalle);
     
-    ProcesoRegistroImpl GuardarVariosDetalles(List<Detalles> detalles);
+    Map<String, Object> GuardarVariosDetalles(List<Detalles> detalles);
 }
