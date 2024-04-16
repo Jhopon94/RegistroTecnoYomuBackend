@@ -5,6 +5,7 @@
 package com.registroTY.principal.controllers;
 
 import com.registroTY.principal.entities.Cliente;
+import com.registroTY.principal.logica.gestionClientes.RegistroCliente;
 import com.registroTY.principal.services.ClienteServicioInterfaz;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,10 @@ public class ClienteController {
     }
     
     @PostMapping("/Clientes")
-    public void GuardarCliente(@RequestBody Cliente cliente){
+    public String GuardarCliente(@RequestBody Cliente cliente){
+        //Este string spring lo envía automáticamente como respuesta al front
     
-        servicioCliente.GuardarCliente(cliente);
+        RegistroCliente registrarCliente = new RegistroCliente(cliente, servicioCliente);
+        return registrarCliente.RegistrarCliente();
     }
 }

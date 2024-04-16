@@ -9,6 +9,7 @@ package com.registroTY.principal.services;
 import com.registroTY.principal.entities.Cliente;
 import com.registroTY.principal.repository.ClienteRepo;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class ClienteServicio implements ClienteServicioInterfaz {
     
     @Autowired
     private ClienteRepo repoCliente;
+    
     
     @Override
     public List<Cliente> ListaClientes(){
@@ -33,13 +35,32 @@ public class ClienteServicio implements ClienteServicioInterfaz {
     }
     
     @Override
-    public void GuardarCliente(Cliente cliente){
+    public String GuardarCliente(Cliente cliente){
     
         System.out.println("Guardando cliente...");
         try {
             repoCliente.save(cliente);
+            String mensaje =  cliente.getNombre() + " registrado correctamente!";
+            return mensaje;
         } catch (Exception e) {
             System.out.println("Error al guardar cliente por: " + e);
+            return "Error en aplicación al registrar al cliente!";
+        }
+    }
+
+    @Override
+    public String ConsultarCliente(Cliente cliente) {
+        System.out.println("Consultando un cliente...");
+        try {
+            Optional<Cliente> opcional = repoCliente.findById(cliente.getId()); //Define si se recibe un objeto o null
+            if(opcional.isPresent()){ //Si el objeto tiene resultado interno
+                return "El cliente ya existe!";
+            }else{ //Si el objeto encontrado  está vacío (null)
+                return GuardarCliente(cliente); //Se guarda el cliente encontrado
+            }
+        } catch (Exception e) {
+            System.out.println("No se encontró cliente por error en base de datos : " + e);
+                return "No se encontró cliente por error en aplicación!";
         }
     }
 }

@@ -12,5 +12,7 @@ public interface ClienteServicioInterfaz {
     
     List<Cliente> ListaClientes();
     
-    void GuardarCliente(Cliente cliente);
+    String GuardarCliente(Cliente cliente);
+    
+    String ConsultarCliente(Cliente cliente);
 }
