@@ -43,7 +43,7 @@ public class ClienteServicio implements ClienteServicioInterfaz {
             String mensaje =  cliente.getNombre() + " registrado correctamente!";
             return mensaje;
         } catch (Exception e) {
-            System.out.println("Error al guardar cliente por: " + e);
+            System.out.println("Error en aplicacion al guardar cliente por: " + e);
             return "Error en aplicación al registrar al cliente!";
         }
     }
@@ -56,7 +56,7 @@ public class ClienteServicio implements ClienteServicioInterfaz {
             if(opcional.isPresent()){ //Si el objeto tiene resultado interno
                 return "El cliente ya existe!";
             }else{ //Si el objeto encontrado  está vacío (null)
-                return GuardarCliente(cliente); //Se guarda el cliente encontrado
+                return cliente.getNombre(); //Se devuelve el nombre para poder registrar el cliente
             }
         } catch (Exception e) {
             System.out.println("No se encontró cliente por error en base de datos : " + e);

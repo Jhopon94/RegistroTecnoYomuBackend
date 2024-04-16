@@ -22,11 +22,14 @@ public class RegistroCliente {
     public String RegistrarCliente(){
         
         //Primero checamos que no exista
-        return VerificarExistencia();
+        if(!ClienteExiste()) return servicioCliente.GuardarCliente(cliente);
+        else return mensaje;
     }
     
     //Para notificar al usuario en caso de que el cliente exista en la base de datos
-    private String VerificarExistencia(){
-        return servicioCliente.ConsultarCliente(cliente);
+    private boolean ClienteExiste(){
+        mensaje = servicioCliente.ConsultarCliente(cliente);
+        //si cliente no existe, es decir, se devolvió el nombre
+        return !cliente.getNombre().equals(mensaje);
     }
 }

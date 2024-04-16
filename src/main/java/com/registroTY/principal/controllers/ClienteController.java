@@ -31,8 +31,8 @@ public class ClienteController {
     @PostMapping("/Clientes")
     public String GuardarCliente(@RequestBody Cliente cliente){
         //Este string spring lo envía automáticamente como respuesta al front
-    
         RegistroCliente registrarCliente = new RegistroCliente(cliente, servicioCliente);
         return registrarCliente.RegistrarCliente();
+       
     }
 }
