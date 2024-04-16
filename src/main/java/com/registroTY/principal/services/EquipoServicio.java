@@ -7,6 +7,7 @@ package com.registroTY.principal.services;
 /////////////// Aquí va la lógica de Negocio ///////////////////
 
 import com.registroTY.principal.entities.Equipo;
+import com.registroTY.principal.logica.gestionEquipos.ProcesoRegistroImpl;
 import com.registroTY.principal.repository.EquipoRepo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,13 +45,20 @@ public class EquipoServicio implements EquipoServicioInterfaz {
     }
 
     @Override
-    public void GuardarEquipo(Equipo equipo) {
+    public ProcesoRegistroImpl GuardarEquipo(Equipo equipo) {
         
         System.out.println("Guardando equipo...");
+        ProcesoRegistroImpl resultado = new ProcesoRegistroImpl();
         try {
         repoEquipo.save(equipo);
+        resultado.setMensaje("Equipo registrado correctamente");
+        resultado.setProcesoExitoso(true);
+        return resultado;
         } catch (Exception e) {
             System.out.println("Error al guardar equipo por: " + e);
+            resultado.setMensaje("Error de aplicación al registrar equipo");
+            resultado.setProcesoExitoso(false);
+            return resultado;
         }
     }
 }

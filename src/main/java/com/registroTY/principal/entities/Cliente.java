@@ -35,5 +35,6 @@ public class Cliente {
     private String correo;
     private String direccion;
     private Date fechaRegistro;
-    private String serviciosTomados;
+    @NotNull
+    private int serviciosTomados;
 }

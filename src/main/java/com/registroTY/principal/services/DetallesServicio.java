@@ -7,6 +7,7 @@ package com.registroTY.principal.services;
 /////////////// Aquí va la lógica de Negocio ///////////////////
 
 import com.registroTY.principal.entities.Detalles;
+import com.registroTY.principal.logica.gestionEquipos.ProcesoRegistroImpl;
 import com.registroTY.principal.repository.DetallesRepo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,12 +57,19 @@ public class DetallesServicio implements DetallesServicioInterfaz {
     }
 
     @Override
-    public void GuardarVariosDetalles(List<Detalles> detalles) {
+    public ProcesoRegistroImpl GuardarVariosDetalles(List<Detalles> detalles) {
            System.out.println("Guardando varios detalles...");
+           ProcesoRegistroImpl resultado = new ProcesoRegistroImpl();
            try {
-        repoDetalles.saveAll(detalles);
+            repoDetalles.saveAll(detalles);
+            resultado.setMensaje("Detales registrados correctamente");
+            resultado.setProcesoExitoso(true);
+            return resultado;
         } catch (Exception e) {
                System.out.println("Erro al guardar lista de detalles por: " + e);
+               resultado.setMensaje("Error de apicación al registrar los detalles");
+               resultado.setProcesoExitoso(false);
+               return resultado;
         }
     }
 }

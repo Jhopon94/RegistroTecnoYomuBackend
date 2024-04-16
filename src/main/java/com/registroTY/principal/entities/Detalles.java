@@ -30,5 +30,6 @@ public class Detalles {
     private int idEquipo;
     @NotBlank(message="Debe especificarse una descripción!")
     private String descripcion;
-    private String precio;
+    @NotNull
+    private int precio;
 }

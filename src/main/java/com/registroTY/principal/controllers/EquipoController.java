@@ -5,6 +5,9 @@
 package com.registroTY.principal.controllers;
 
 import com.registroTY.principal.entities.Equipo;
+import com.registroTY.principal.logica.gestionEquipos.ProcesoRegistroImpl;
+import com.registroTY.principal.logica.gestionEquipos.RegistroEquipo;
+import com.registroTY.principal.services.DetallesServicioInterfaz;
 import com.registroTY.principal.services.EquipoServicioInterfaz;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,8 @@ public class EquipoController {
     
     @Autowired
     private EquipoServicioInterfaz servicioEquipo;
+    @Autowired
+    private DetallesServicioInterfaz servicioDetalles;
     
     @GetMapping("/Equipos")
     public List<Equipo> ListaEquipos(){
@@ -29,9 +34,10 @@ public class EquipoController {
     }
     
     @PostMapping("/Equipos")
-    public void GuardarEquipo(@RequestBody Equipo equipo){
+    public ProcesoRegistroImpl GuardarEquipo(@RequestBody Object[] contenedorObjetos){
     
-        servicioEquipo.GuardarEquipo(equipo);
+        RegistroEquipo registrarEquipo = new RegistroEquipo(contenedorObjetos, servicioEquipo, servicioDetalles);
+        return registrarEquipo.RegistrarEquipo();
     }
     
     @DeleteMapping("/Equipos/{id}")

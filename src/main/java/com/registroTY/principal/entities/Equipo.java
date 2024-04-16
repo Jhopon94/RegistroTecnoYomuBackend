@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -31,6 +32,8 @@ public class Equipo {
     private int idCliente;
     @NotBlank(message="Debe especificarse el tipo de ingreso!")
     private String tipoIngreso;
+    @NotBlank
+    private String modelo;
     @NotBlank(message="Debe especificarse las condiciones físicas en que se recibe!")
     private String condicionesFisicasRecibidas;
     private String daniosRecibido;
@@ -44,6 +47,7 @@ public class Equipo {
     private int saldoPendiente;
     private Date fechaIngreso;
     private Date fechaSalida;
+    @NotNull
     private int diasGarantia;
     
 }

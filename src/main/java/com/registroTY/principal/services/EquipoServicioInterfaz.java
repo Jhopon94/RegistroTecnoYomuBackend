@@ -5,6 +5,7 @@
 package com.registroTY.principal.services;
 
 import com.registroTY.principal.entities.Equipo;
+import com.registroTY.principal.logica.gestionEquipos.ProcesoRegistroImpl;
 import java.util.List;
 
 ///////Este interfaz es solo para que se vea mas ordenado y bonito ////////////
@@ -14,5 +15,5 @@ public interface EquipoServicioInterfaz {
     
     void EliminarEquipo(int id);
     
-    void GuardarEquipo(Equipo equipo);
+    ProcesoRegistroImpl GuardarEquipo(Equipo equipo);
 }
