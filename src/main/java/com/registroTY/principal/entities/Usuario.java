@@ -5,10 +5,14 @@
 package com.registroTY.principal.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import java.util.Date;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -24,10 +28,10 @@ public class Usuario {
     
     @Id
     @NotNull(message="Debe especificarse el id del empleado usado!")
-    private int id;
-    @NotNull(message="Debe especificarse el id del empleado usado!")
-    private int idEmpleado;
+    @Positive
+    private Integer idEmpleado;
     @NotBlank(message="Debe especificarse un nombre de usuario!")
+    @Pattern(regexp = "\\S+", message = "El nombre de uusario no debe llevar espacios") //No puede tener espacios
     private String nombreUsuario;
     @NotBlank(message="Debe especificarse una contraseña!")
     private String contrasenia;

@@ -6,10 +6,16 @@ package com.registroTY.principal.services;
 
 /////////////// Aquí va la lógica de Negocio ///////////////////
 
+import com.registroTY.principal.entities.Empleado;
 import com.registroTY.principal.entities.Usuario;
 import com.registroTY.principal.repository.UsuarioRepo;
+import jakarta.persistence.PersistenceException;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 
@@ -44,12 +50,37 @@ public class UsuarioServicio implements UsuarioServicioInterfaz {
     }
     
     @Override
-    public void GuardarUsuario(Usuario usuario){
+    public String GuardarUsuario(Usuario usuario){
         System.out.println("Guardando usuario...");
         try {
         repoUsuario.save(usuario);
+        return usuario.getNombreUsuario() +  " registrado satisfactoriamente como usuario!";
+        }catch(DataIntegrityViolationException pe){
+            
+            System.out.println("Error constraint por: " + pe);
+            return "Error, probablemente ya se usó este nombre de usuario!";
+            
         } catch (Exception e) {
-            System.out.println("");
+            System.out.println("No se registró por: " + e);
+            return "No se pudo regisrar el usuario por problemas en la aplicación";
+        }
+    }
+    
+    // La consulta de usuario no puede ser por id porque se genera automáticamente, mas bien por idEmpleado
+    @Override
+    public String ConsultarUsuarioExiste(Usuario usuario) {
+        System.out.println("Consultando la existencia de un usuario...");
+        try {
+            Optional<Usuario> opcional = repoUsuario.findById(usuario.getIdEmpleado()); //Define si se recibe un objeto o null
+            if(opcional.isPresent()){ //Si el objeto tiene resultado interno
+                Usuario usu = opcional.get();
+                return "El empleado ya tiene un usuario llamado " + usu.getNombreUsuario() ;
+            }else{ //Si el objeto encontrado  está vacío (null)
+                return usuario.getNombreUsuario(); //Se devuelve el nombre para poder registrar el usuario
+            }
+        } catch (Exception e) {
+            System.out.println("No se encontró usuario por error en base de datos : " + e);
+            return "No se encontró usuario por error en aplicación";
         }
     }
 }

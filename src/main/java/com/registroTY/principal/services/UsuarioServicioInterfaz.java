@@ -4,6 +4,7 @@
  */
 package com.registroTY.principal.services;
 
+import com.registroTY.principal.entities.Empleado;
 import com.registroTY.principal.entities.Usuario;
 import java.util.List;
 
@@ -14,5 +15,7 @@ public interface UsuarioServicioInterfaz {
     
     void EliminarUsuario(int id);
     
-    void GuardarUsuario(Usuario usuario);
+    String GuardarUsuario(Usuario usuario);
+    
+    String ConsultarUsuarioExiste(Usuario usuario);
 }

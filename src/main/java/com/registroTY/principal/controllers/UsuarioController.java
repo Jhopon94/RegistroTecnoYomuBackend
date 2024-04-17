@@ -4,10 +4,15 @@
  */
 package com.registroTY.principal.controllers;
 
+import com.registroTY.principal.entities.Empleado;
 import com.registroTY.principal.entities.Usuario;
+import com.registroTY.principal.logica.gestionUsuarios.ContenedorUsuarioCliente;
+import com.registroTY.principal.logica.gestionUsuarios.RegistroUsuario;
 import com.registroTY.principal.services.UsuarioServicioInterfaz;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,9 +34,14 @@ public class UsuarioController {
     }
     
     @PostMapping("/Usuarios")
-    public void GuardarUsuario(@RequestBody Usuario usuario){
+    public String GuardarUsuario(@Valid @RequestBody Usuario usuario, BindingResult resultado){
     
-        servicioUsuario.GuardarUsuario(usuario);
+        if(resultado.hasErrors()){
+            return "Hay algún dato incorrecto, recuerda que el nombre de usaurio no debe llevar espacios!";
+        }else{
+            RegistroUsuario registrarUsuario = new RegistroUsuario(usuario, servicioUsuario);
+            return registrarUsuario.RegistrarUsuario();
+        }
     }
     
     @DeleteMapping("/Usuarios/{id}")
