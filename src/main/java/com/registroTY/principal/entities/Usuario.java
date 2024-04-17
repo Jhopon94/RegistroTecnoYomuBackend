@@ -4,9 +4,8 @@
  */
 package com.registroTY.principal.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -30,6 +29,7 @@ public class Usuario {
     @NotNull(message="Debe especificarse el id del empleado usado!")
     @Positive
     private Integer idEmpleado;
+    @Column(unique = true)
     @NotBlank(message="Debe especificarse un nombre de usuario!")
     @Pattern(regexp = "\\S+", message = "El nombre de uusario no debe llevar espacios") //No puede tener espacios
     private String nombreUsuario;

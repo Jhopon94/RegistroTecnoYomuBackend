@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import java.util.Date;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,9 +29,10 @@ public class TipoItem {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @NotNull(message="Debe especificarse el id de la entrada del ítem!")
-    private int idEntradaItem;
+    @Positive
+    private Integer idEntradaItem;
     @NotBlank(message="Debe especificarse el tipo de item!")
     @Column(unique = true)
     private String tipoDeItem;

@@ -10,6 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import java.util.Date;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,14 +29,18 @@ public class EntradaItem {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+    @Positive
     @NotNull(message="Debe especificarse un id del ítem entrante!")
-    private int idItem;
+    private Integer idItem;
     @NotNull(message="Debe especificarse la cantidad de items entrantes!")
-    private int cantidad;
+    @Positive
+    private Integer cantidad;
     @NotNull(message="Debe calcularse el total!")
-    private int precioTotal;
+    @PositiveOrZero
+    private Integer precioTotal;
     @NotNull(message="Debe especificarse el costo unitario!")
-    private int costoUnitario;
+    @PositiveOrZero
+    private Integer costoUnitario;
     private Date fechaCompra;
 }

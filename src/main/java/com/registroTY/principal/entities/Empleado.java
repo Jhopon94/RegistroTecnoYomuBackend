@@ -4,6 +4,7 @@
  */
 package com.registroTY.principal.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -27,13 +28,15 @@ public class Empleado {
     @Id
     @NotNull(message="Debe especificarse un id!")
     @Positive
-    private int id;
+    private Integer id;
     @NotBlank(message="Debe especificarse un nombre!")
+    @Column(unique = true)
     private String nombre;
     @NotBlank(message="Debe especificarse un número de celular!")
     private String celular;
     @NotBlank(message="Debe especificarse un correo electrónico!")
     @Email
+    @Column(unique = true)
     private String correo;
     @NotBlank(message="Debe especificarse una dirección!")
     private String direccion;
@@ -41,6 +44,7 @@ public class Empleado {
     @NotBlank(message="Debe especificarse el cargo!")
     private String cargo;
     @NotBlank(message="Debe especificarse una foto!")
+    @Column(unique = true)
     private String foto;
     @NotNull(message="Debe determinarse por lógica su disponibilidad!")
     private Boolean disponibleParaUsuario;

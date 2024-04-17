@@ -27,13 +27,13 @@ public class Detalles {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @NotNull(message="Debe especificarse el id del equipo mediante lógica!")
     @Positive
-    private int idEquipo;
+    private Integer idEquipo;
     @NotBlank(message="Debe especificarse una descripción!")
     private String descripcion;
     @NotNull
     @PositiveOrZero
-    private int precio;
+    private Integer precio;
 }

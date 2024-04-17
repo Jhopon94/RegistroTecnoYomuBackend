@@ -9,6 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import java.util.Date;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,13 +28,16 @@ public class SalidaItem {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @NotNull(message="Debe especificarse el id del equipo donde se usó el ítem!")
-    private int idEquipo;
+    @Positive
+    private Integer idEquipo;
     @NotNull(message="Debe especificarse el id del ítem en cuestión!")
-    private int idItem;
+    @Positive
+    private Integer idItem;
     @NotNull(message="Debe especificarse la cantidad de tiems que salen!")
-    private int cantidad;
+    @PositiveOrZero
+    private Integer cantidad;
     private Date fechaUso;
 }
 

@@ -29,10 +29,10 @@ public class Equipo {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @NotNull(message="Debe especificarse el id del cliente!")
     @Positive
-    private int idCliente;
+    private Integer idCliente;
     @NotBlank(message="Debe especificarse el tipo de ingreso!")
     private String tipoIngreso;
     @NotBlank
@@ -44,16 +44,16 @@ public class Equipo {
     private String partesInternasRecibido;
     @NotNull(message="Debe calcularse el total!")
     @PositiveOrZero
-    private int precioTotal;
+    private Integer precioTotal;
     @NotBlank(message="Debe especificarse el estado del equipo!")
     private String estadoEquipo;
     @NotNull(message="Debe especificarse el saldo pendiente!")
     @PositiveOrZero
-    private int saldoPendiente;
+    private Integer saldoPendiente;
     private Date fechaIngreso;
     private Date fechaSalida;
     @NotNull
     @PositiveOrZero
-    private int diasGarantia;
+    private Integer diasGarantia;
     
 }

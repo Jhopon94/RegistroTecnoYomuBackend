@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import java.util.Date;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,7 +28,7 @@ public class Items {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @NotBlank(message="Debe especificarse un nombre de ítem!")
     @Column(unique = true) //estblecer unico a nivel de backend también
     private String nombre;
@@ -36,6 +37,7 @@ public class Items {
     @NotBlank(message="Debe especificarse una descripción!")
     private String descripcion;
     @NotNull(message="Debe calcularse el saldo!")
-    private int saldo;
+    @PositiveOrZero
+    private Integer saldo;
     private Date fechaCreacion;
 }
