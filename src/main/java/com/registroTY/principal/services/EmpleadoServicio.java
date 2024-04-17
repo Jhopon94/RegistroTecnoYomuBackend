@@ -6,9 +6,11 @@ package com.registroTY.principal.services;
 
 /////////////// Aquí va la lógica de Negocio ///////////////////
 
+import com.registroTY.principal.entities.Cliente;
 import com.registroTY.principal.entities.Empleado;
 import com.registroTY.principal.repository.EmpleadoRepo;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,12 +35,30 @@ public class EmpleadoServicio implements EmpleadoServicioInterfaz {
     }
 
     @Override
-    public void GuardarEmpleado(Empleado empleado) {
+    public String GuardarEmpleado(Empleado empleado) {
         System.out.println("Guardando empleado...");
         try {
         repoEmpleado.save(empleado);
+        return empleado.getNombre() + " registrado como empleado satisfactoriamente!";
         } catch (Exception e) {
             System.out.println("Error al guardar empleado por : " + e);
+            return "Error en la aplicación al intentar registrar el empleado!";
+        }
+    }
+    
+    @Override
+    public String ConsultarEmpleado(Empleado empleado) {
+        System.out.println("Consultando un empleado...");
+        try {
+            Optional<Empleado> opcional = repoEmpleado.findById(empleado.getId()); //Define si se recibe un objeto o null
+            if(opcional.isPresent()){ //Si el objeto tiene resultado interno
+                return "El empleado ya existe!";
+            }else{ //Si el objeto encontrado  está vacío (null)
+                return empleado.getNombre(); //Se devuelve el nombre para poder registrar el empleado
+            }
+        } catch (Exception e) {
+            System.out.println("No se encontró empleado por error en base de datos : " + e);
+                return "No se encontró el empleado por error en aplicación!";
         }
     }
 }

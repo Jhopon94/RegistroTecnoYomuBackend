@@ -12,5 +12,7 @@ public interface EmpleadoServicioInterfaz {
     
     List<Empleado> ListaEmpleados();
     
-    void GuardarEmpleado(Empleado empleado);
+    String GuardarEmpleado(Empleado empleado);
+    
+    public String ConsultarEmpleado(Empleado empleado);
 }

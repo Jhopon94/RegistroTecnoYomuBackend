@@ -5,9 +5,12 @@
 package com.registroTY.principal.controllers;
 
 import com.registroTY.principal.entities.Empleado;
+import com.registroTY.principal.logica.gestionEmpleados.RegistroEmpleado;
 import com.registroTY.principal.services.EmpleadoServicioInterfaz;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,8 +30,14 @@ public class EmpleadoController {
     }
     
     @PostMapping("/Empleado")
-    public void GuardarEmpleado(@RequestBody Empleado empleado){
-    
-        servicioEmpleado.GuardarEmpleado(empleado);
+    public String GuardarEmpleado(@Valid @RequestBody Empleado empleado, BindingResult resultado){
+        
+        if(resultado.hasErrors()){
+            return "Hay error en algún dato!";
+        }else{
+            RegistroEmpleado registrarEmpleado = new RegistroEmpleado(empleado, servicioEmpleado);
+            return registrarEmpleado.RegistrarEmpleado();
+        }
+        
     }
 }
