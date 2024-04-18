@@ -12,5 +12,7 @@ public interface TipoItemServicioInterfaz {
     
     List<TipoItem> ListaTiposItem();
     
-    void GuardarTipoItem(TipoItem tipoItem);
+    String GuardarTipoItem(TipoItem tipoItem);
+    
+    String ConsultarExistenciaTipoItem(TipoItem tipoItem);
 }

@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import java.util.Date;
 import lombok.EqualsAndHashCode;
@@ -35,6 +36,7 @@ public class TipoItem {
     private Integer idEntradaItem;
     @NotBlank(message="Debe especificarse el tipo de item!")
     @Column(unique = true)
+    @Pattern(regexp = "\\S+", message = "El nombre de uusario no debe llevar espacios")
     private String tipoDeItem;
     private Date fechaCreacion;
 }

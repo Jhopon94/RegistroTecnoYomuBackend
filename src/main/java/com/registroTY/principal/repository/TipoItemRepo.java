@@ -13,4 +13,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TipoItemRepo extends CrudRepository<TipoItem, Integer>{ //Integer porque el id es int
     
+    boolean existsByTipoDeItem(String tipoDeItem);
 }

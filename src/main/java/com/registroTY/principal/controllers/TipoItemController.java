@@ -5,9 +5,12 @@
 package com.registroTY.principal.controllers;
 
 import com.registroTY.principal.entities.TipoItem;
+import com.registroTY.principal.logica.gestionItems.RegistroTipoItem;
 import com.registroTY.principal.services.TipoItemServicioInterfaz;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,8 +30,9 @@ public class TipoItemController {
     }
     
     @PostMapping("/TiposItem")
-    public void GuardarTipoItem(@RequestBody TipoItem tipoItem){
+    public String GuardarTipoItem(@Valid @RequestBody TipoItem tipoItem, BindingResult resultado){
     
-        servicioTipoItem.GuardarTipoItem(tipoItem);
+        if(resultado.hasErrors()) return "Error en los datos ingresados, intenta poner nombre de usuario sin espacios.";
+        return new RegistroTipoItem(servicioTipoItem, tipoItem).RegistrarTipoItem();
     }
 }

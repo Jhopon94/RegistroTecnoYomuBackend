@@ -6,14 +6,9 @@ package com.registroTY.principal.services;
 
 /////////////// Aquí va la lógica de Negocio ///////////////////
 
-import com.registroTY.principal.entities.Empleado;
 import com.registroTY.principal.entities.Usuario;
 import com.registroTY.principal.repository.UsuarioRepo;
-import jakarta.persistence.PersistenceException;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
