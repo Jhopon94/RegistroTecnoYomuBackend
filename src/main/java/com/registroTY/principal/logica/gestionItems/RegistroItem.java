@@ -4,10 +4,35 @@
  */
 package com.registroTY.principal.logica.gestionItems;
 
-/**
- *
- * @author Jhopon
- */
+import com.registroTY.principal.entities.Items;
+import com.registroTY.principal.services.ItemsServicioInterfaz;
+
+
+
 public class RegistroItem {
     
+    ItemsServicioInterfaz servicioItem;
+    Items item;
+    String mensaje;
+    
+    public RegistroItem(ItemsServicioInterfaz servicioItem, Items item){
+    
+        this.servicioItem = servicioItem;
+        this.item = item;
+    }
+    
+    public String RegistrarItem(){
+    
+        //Si item no existe
+        //Como es el registro, la cantidad entrante del item se define como el saldo
+        if(!ItemExiste()) return servicioItem.GuardarItem(item);
+        else return mensaje;
+    }
+    
+    private boolean ItemExiste(){
+        
+        mensaje = servicioItem.ConsultarExistenciaItem(item);
+        //Si se devuelve el nombre del item
+        return !mensaje.equals(item.getNombre());
+    }
 }

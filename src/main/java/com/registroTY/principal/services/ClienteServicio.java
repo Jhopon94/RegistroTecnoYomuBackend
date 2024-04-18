@@ -9,7 +9,6 @@ package com.registroTY.principal.services;
 import com.registroTY.principal.entities.Cliente;
 import com.registroTY.principal.repository.ClienteRepo;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,8 +51,7 @@ public class ClienteServicio implements ClienteServicioInterfaz {
     public String ConsultarCliente(Cliente cliente) {
         System.out.println("Consultando un cliente...");
         try {
-            Optional<Cliente> opcional = repoCliente.findById(cliente.getId()); //Define si se recibe un objeto o null
-            if(opcional.isPresent()){ //Si el objeto tiene resultado interno
+            if(repoCliente.existsById(cliente.getId())){ //Si el objeto tiene resultado interno
                 return "El cliente ya existe!";
             }else{ //Si el objeto encontrado  está vacío (null)
                 return cliente.getNombre(); //Se devuelve el nombre para poder registrar el cliente

@@ -5,9 +5,12 @@
 package com.registroTY.principal.controllers;
 
 import com.registroTY.principal.entities.Items;
+import com.registroTY.principal.logica.gestionItems.RegistroItem;
 import com.registroTY.principal.services.ItemsServicioInterfaz;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,8 +30,9 @@ public class ItemsController {
     }
     
     @PostMapping("/Items")
-    public void GuardarItems(@RequestBody Items items){
-        System.out.println("A guardar el item " + items.getNombre());
-        servicioItems.GuardarItem(items);
+    public String GuardarItems(@Valid @RequestBody Items item, BindingResult resultado){
+        
+        if(resultado.hasErrors())return "Error en el llenado de los datos del ítem!";
+        return new RegistroItem(servicioItems,item).RegistrarItem();
     }
 }

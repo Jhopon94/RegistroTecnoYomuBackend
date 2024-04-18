@@ -12,5 +12,7 @@ public interface ItemsServicioInterfaz {
     
     List<Items> ListaItems();
     
-    void GuardarItem(Items item);
+    String GuardarItem(Items item);
+    
+    String ConsultarExistenciaItem(Items item);
 }

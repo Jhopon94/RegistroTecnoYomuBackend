@@ -33,13 +33,43 @@ public class ItemsServicio implements ItemsServicioInterfaz {
     }
 
     @Override
-    public void GuardarItem(Items item) {
+    public String GuardarItem(Items item) {
         
         System.out.println("Guardando ítem...");
         try {
         repoItems.save(item);
+        return "Item registrado correctamente";
         } catch (Exception e) {
             System.out.println("Error al guardar ítem por: " + e);
+            return "No se pudo registrar el item por error en la aplicación";
+        }
+    }
+    
+    @Override
+    public String ConsultarExistenciaItem(Items item){
+    
+        System.out.println("Conusltando existencia de item con id: " + item.getId());
+        try {
+            /*
+            Iterable<Items> listaItems = repoItems.findAll();
+            Items itemAux = new Items();
+            for(Items itemLista : listaItems){
+                itemAux = itemLista;
+            }
+            
+            if(itemAux != null){
+              return "Ya existe el ítem: " + itemAux.getNombre();
+            } return item.getNombre();
+            
+            */
+           if(repoItems.existsByNombre(item.getNombre())){
+                return "Ya existe el ítem!";
+            }else{
+                return item.getNombre();
+            }
+        } catch (Exception e) {
+            System.out.println("No se encontró item por: " + e);
+            return "No se pudo verificar la existencia del ítem por error en la aplicación";
         }
     }
 }

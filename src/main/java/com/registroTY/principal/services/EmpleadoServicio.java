@@ -50,8 +50,7 @@ public class EmpleadoServicio implements EmpleadoServicioInterfaz {
     public String ConsultarEmpleado(Empleado empleado) {
         System.out.println("Consultando un empleado...");
         try {
-            Optional<Empleado> opcional = repoEmpleado.findById(empleado.getId()); //Define si se recibe un objeto o null
-            if(opcional.isPresent()){ //Si el objeto tiene resultado interno
+            if(repoEmpleado.existsById(empleado.getId())){ //Si el objeto tiene resultado interno
                 return "El empleado ya existe!";
             }else{ //Si el objeto encontrado  está vacío (null)
                 return empleado.getNombre(); //Se devuelve el nombre para poder registrar el empleado

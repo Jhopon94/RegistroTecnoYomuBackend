@@ -71,10 +71,8 @@ public class UsuarioServicio implements UsuarioServicioInterfaz {
     public String ConsultarUsuarioExiste(Usuario usuario) {
         System.out.println("Consultando la existencia de un usuario...");
         try {
-            Optional<Usuario> opcional = repoUsuario.findById(usuario.getIdEmpleado()); //Define si se recibe un objeto o null
-            if(opcional.isPresent()){ //Si el objeto tiene resultado interno
-                Usuario usu = opcional.get();
-                return "El empleado ya tiene un usuario llamado " + usu.getNombreUsuario() ;
+            if(repoUsuario.existsById(usuario.getIdEmpleado())){ //Si el objeto tiene resultado interno
+                return "El empleado ya tiene un usuario llamado " + usuario.getNombreUsuario() ;
             }else{ //Si el objeto encontrado  está vacío (null)
                 return usuario.getNombreUsuario(); //Se devuelve el nombre para poder registrar el usuario
             }
