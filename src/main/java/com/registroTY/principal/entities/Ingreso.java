@@ -4,6 +4,7 @@
  */
 package com.registroTY.principal.entities;
 
+import java.time.LocalDate;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,6 +17,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class Ingreso {
     
+    private LocalDate fecha;
     private String nombreCliente;
     private int cedulaCliente;
     private List<Detalles> listaDetalles;

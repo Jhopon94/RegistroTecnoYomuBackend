@@ -5,6 +5,7 @@
 package com.registroTY.principal.services;
 
 import com.registroTY.principal.entities.Detalles;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ public interface DetallesServicioInterfaz {
     
     List<Detalles> ListaDetalles();
     
-    List<?> ListaDetallesRango(Date startDate, Date endDate);
+    List<Map<String, Object>> ListaDetallesRango(LocalDate startDate, LocalDate endDate);
     
     void EliminarDetalle(int id);
     

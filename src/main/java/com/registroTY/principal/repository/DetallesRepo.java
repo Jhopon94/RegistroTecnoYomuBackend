@@ -7,8 +7,10 @@ package com.registroTY.principal.repository;
 //////////////Esta interface nos evita escribir las sentencias sql ////////////////////
 
 import com.registroTY.principal.entities.Detalles;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -20,10 +22,11 @@ public interface DetallesRepo extends CrudRepository<Detalles, Integer>{ //Integ
     List<?> findAllBetweenFechaRegistro(Date startDate, Date endDate);
     
     @Query(value = "SELECT c.nombre AS nombreCliente, c.id AS cedulaCliente, d.precio AS precio," +
-            "d.id AS idDetalle, d.fechaRegistro AS fechaDetalle, d.descripcion AS descripcionDetalle " +
+            "d.id AS idDetalle, d.fechaRegistro AS fechaDetalle, d.descripcion AS descripcionDetalle, " +
+            "d.idEquipo AS idEquipoDetalle " +
             "FROM detalles d " + 
             "INNER JOIN equipo e ON d.idEquipo = e.id " +
             "INNER JOIN cliente c ON e.idCliente = c.id " + 
             "WHERE d.fechaRegistro BETWEEN ?1 AND ?2", nativeQuery = true)
-    List<?> listaIngresosRaw(Date fechaInicio, Date fechaFin);
+    List<Map<String, Object>> listaIngresosRaw(LocalDate fechaInicio, LocalDate fechaFin);
 }

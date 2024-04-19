@@ -4,12 +4,11 @@
  */
 package com.registroTY.principal.controllers;
 
-import com.registroTY.principal.entities.Detalles;
+import com.registroTY.principal.entities.Ingreso;
 import com.registroTY.principal.logica.gestionContable.ConsultaIngresos;
 import com.registroTY.principal.services.DetallesServicioInterfaz;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,21 +22,21 @@ public class DatosContablesController {
     private DetallesServicioInterfaz servicioDetalles;
 
     @GetMapping("/DatosContables/{peticionLista}/{fechaInicioString}/{fechaFinString}")
-    public List<?> ListaRequerida(@PathVariable String peticionLista, @PathVariable String fechaInicioString, @PathVariable String fechaFinString) {
+    public List<Ingreso> ListaRequerida(@PathVariable String peticionLista, @PathVariable String fechaInicioString, @PathVariable String fechaFinString) {
         switch (peticionLista) {
             case "ingresos":
                 //Si se piden ingresos, se intenta parsear las fechas
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                Date fechaInicio = null;
-                Date fechaFin = null;
+                DateTimeFormatter formateador = DateTimeFormatter.ofPattern("ddMMyyyy");
+                LocalDate fechaInicio = null;
+                LocalDate fechaFin = null;
                 
                 try {
                     System.out.println("Intentaremos parsear las fechas...");
-                    fechaInicio = dateFormat.parse(fechaInicioString);
-                    fechaFin = dateFormat.parse(fechaFinString);
-                    System.out.println("Fechas parseadas correctamente!");
+                    fechaInicio = LocalDate.parse(fechaInicioString, formateador);
+                    fechaFin = LocalDate.parse(fechaFinString, formateador);
+                    System.out.println("Fechas parseadas correctamente! inicio: " + fechaInicio + " fin: " + fechaFin);
                     return new ConsultaIngresos(fechaInicio, fechaFin, servicioDetalles).listaIngresos();
-                } catch (ParseException e) {
+                } catch (Exception e) {
                     System.out.println("No se pudiero parsear las fechas entrantes por: " + e);
                     return null;
                 }

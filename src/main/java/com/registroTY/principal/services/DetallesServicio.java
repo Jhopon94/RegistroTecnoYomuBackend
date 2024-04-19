@@ -8,6 +8,7 @@ package com.registroTY.principal.services;
 
 import com.registroTY.principal.entities.Detalles;
 import com.registroTY.principal.repository.DetallesRepo;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +38,7 @@ public class DetallesServicio implements DetallesServicioInterfaz {
     }
     
     @Override
-    public List<?> ListaDetallesRango(Date startDate, Date endDate){
+    public List<Map<String, Object>> ListaDetallesRango(LocalDate startDate, LocalDate endDate){
         System.out.println("Consultando lista de detalles por rango de fecha...");
         try {
             return repoDetalles.listaIngresosRaw(startDate, endDate);
