@@ -14,7 +14,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DetallesRepo extends CrudRepository<Detalles, String>{ //Integer porque el id es int
+public interface DetallesRepo extends CrudRepository<Detalles, Integer>{ //Integer porque el id es int
     
     @Query(value = "SELECT * FROM detalles WHERE fechaRegistro BETWEEN ?1 AND ?2", nativeQuery = true)
     List<?> findAllBetweenFechaRegistro(Date startDate, Date endDate);

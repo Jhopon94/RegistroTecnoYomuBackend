@@ -84,4 +84,25 @@ public class EquipoServicio implements EquipoServicioInterfaz {
             return null;
         }
     }
+    
+    @Override
+    public String UltimoIDEquipo(){
+    
+        System.out.println("Verificaremos el id del último equipo registrado...");
+        String id;
+        try {
+            Equipo equipo = new Equipo();
+            if(repoEquipo.UltimoEquipo().isPresent()){
+                equipo = repoEquipo.UltimoEquipo().get();
+                System.out.println("Adquirido el último equipo");
+                return equipo.getId();
+            }else{
+                System.out.println("No hay registros...");
+                return "";
+            }
+        } catch (Exception e) {
+            System.out.println("No se pudo comprobar los registros de equipo por error de consulta...");
+            return null;
+        }
+    }
 }

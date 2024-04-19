@@ -8,6 +8,7 @@ package com.registroTY.principal.repository;
 
 import com.registroTY.principal.entities.Equipo;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -22,4 +23,7 @@ public interface EquipoRepo extends CrudRepository<Equipo, String>{ //Integer po
     
     @Query(value = "SELECT * FROM equipo where fechaSalida IS NOT NULL", nativeQuery = true)
     List<Equipo> EquiposEntregados();
+    
+    @Query(value = "SELECT * FROM equipo ORDER BY fechaIngreso DESC LIMIT 1", nativeQuery = true)
+    Optional<Equipo> UltimoEquipo();
 }

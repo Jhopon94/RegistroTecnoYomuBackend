@@ -11,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import java.util.Date;
 import lombok.EqualsAndHashCode;
@@ -27,7 +26,8 @@ import lombok.ToString;
 public class Detalles {
     
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String idEquipo;
     @NotBlank(message="Debe especificarse una descripción!")
     private String descripcion;

@@ -20,4 +20,6 @@ public interface EquipoServicioInterfaz {
     List<Equipo> ListaEquiposIngresados();
     
     List<Equipo> ListaEquiposEntregados();
+    
+    String UltimoIDEquipo();
 }

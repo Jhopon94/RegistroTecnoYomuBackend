@@ -6,6 +6,7 @@ package com.registroTY.principal.logica.gestionEquipos;
 
 import com.registroTY.principal.entities.Detalles;
 import com.registroTY.principal.entities.Equipo;
+import com.registroTY.principal.logica.TresUltimos;
 import com.registroTY.principal.services.DetallesServicioInterfaz;
 import com.registroTY.principal.services.EquipoServicioInterfaz;
 import java.util.HashMap;
@@ -36,7 +37,9 @@ public class RegistroEquipo {
 
     //Deevuelve un objeto que contiene mensaje de proceso y boolean de exito en operación!
     public Map<String, Object> RegistrarEquipo() {
-
+        
+        //Establecemos el id
+        EstablecerIdEquipo(servicioEquipo.UltimoIDEquipo());
         //Obtenemos los resultados de registrar equipo
         Map<String, Object> resultadoEquipo = servicioEquipo.GuardarEquipo(equipo);
         //Solo se registrarán los detalles si se tuvo éxito registrando el equipo
@@ -44,6 +47,10 @@ public class RegistroEquipo {
 
             //Si se tuvo éxito registrando el equipo
             
+            //Establecemos el idForaneo a los detalles
+            for(Detalles detalle : detalles){
+                detalle.setIdEquipo(equipo.getId());
+            }
             //Se registran los detalles y se obtiene el resultado
             Map<String, Object> resultadoDetalles = servicioDetalles.GuardarVariosDetalles(detalles);
             //Verificamos que se haya tenido éxito registrando los detalles.
@@ -62,6 +69,15 @@ public class RegistroEquipo {
         return resultado;
     }
 
+   private void EstablecerIdEquipo(String id){
    
+       if(id != null){
+           if(id.equals("")){
+               equipo.setId("equipo000");
+           }else{
+               equipo.setId(new TresUltimos().IdNuevo(id));
+           }
+       }
+   }
 
 }
