@@ -31,16 +31,22 @@ public class Cliente {
     @NotNull(message="Debe especificarse un id!")
     @Positive
     private Integer id;
+    
     @NotBlank(message="Debe especificarse un nombre!")
     @Column(unique = true)
     private String nombre;
+    
     @NotBlank(message="Debe especificarse un número de celular!")
     private String celular;
+    
     @Email
     @Column(unique = true)
     private String correo;
+    
     private String direccion;
+    
     private Date fechaRegistro;
+    
     @NotNull
     @PositiveOrZero
     private Integer serviciosTomados;

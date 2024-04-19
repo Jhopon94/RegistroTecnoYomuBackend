@@ -5,6 +5,7 @@
 package com.registroTY.principal.controllers;
 
 import com.registroTY.principal.entities.Detalles;
+import com.registroTY.principal.logica.gestionContable.ConsultaIngresos;
 import com.registroTY.principal.services.DetallesServicioInterfaz;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,7 +36,7 @@ public class DatosContablesController {
                     fechaInicio = dateFormat.parse(fechaInicioString);
                     fechaFin = dateFormat.parse(fechaFinString);
                     System.out.println("Fechas parseadas correctamente!");
-                    return servicioDetalles.ListaDetallesRango(fechaInicio, fechaFin);
+                    return new ConsultaIngresos(fechaInicio, fechaFin, servicioDetalles).listaIngresos();
                 } catch (ParseException e) {
                     System.out.println("No se pudiero parsear las fechas entrantes por: " + e);
                     return null;

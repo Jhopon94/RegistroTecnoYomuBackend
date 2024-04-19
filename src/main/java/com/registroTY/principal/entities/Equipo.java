@@ -30,28 +30,40 @@ public class Equipo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
     @NotNull(message="Debe especificarse el id del cliente!")
     @Positive
     private Integer idCliente;
+    
     @NotBlank(message="Debe especificarse el tipo de ingreso!")
     private String tipoIngreso;
+    
     @NotBlank
     private String modelo;
+    
     @NotBlank(message="Debe especificarse las condiciones físicas en que se recibe!")
     private String condicionesFisicasRecibidas;
+    
     private String daniosRecibido;
+    
     @NotBlank(message="Debe especificarse las aprtes internas con que ingresa!")
     private String partesInternasRecibido;
+    
     @NotNull(message="Debe calcularse el total!")
     @PositiveOrZero
     private Integer precioTotal;
+    
     @NotBlank(message="Debe especificarse el estado del equipo!")
     private String estadoEquipo;
+    
     @NotNull(message="Debe especificarse el saldo pendiente!")
     @PositiveOrZero
     private Integer saldoPendiente;
+    
     private Date fechaIngreso;
+    
     private Date fechaSalida;
+    
     @NotNull
     @PositiveOrZero
     private Integer diasGarantia;

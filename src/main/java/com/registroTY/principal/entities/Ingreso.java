@@ -4,24 +4,19 @@
  */
 package com.registroTY.principal.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import java.util.Date;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
 @Setter
 @Getter
 @ToString
 @EqualsAndHashCode
 public class Ingreso {
-    @Id
-    private Integer id;
-    private Date fecha;
-    private String nombreCliente;
-    /*private Detalles detalle;*/
     
+    private String nombreCliente;
+    private int cedulaCliente;
+    private List<Detalles> listaDetalles;
 }

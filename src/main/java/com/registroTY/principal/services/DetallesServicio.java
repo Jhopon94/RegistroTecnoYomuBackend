@@ -37,12 +37,12 @@ public class DetallesServicio implements DetallesServicioInterfaz {
     }
     
     @Override
-    public List<Detalles> ListaDetallesRango(Date startDate, Date endDate){
-        System.out.println("Consultando lista de detalles por ango de fecha...");
+    public List<?> ListaDetallesRango(Date startDate, Date endDate){
+        System.out.println("Consultando lista de detalles por rango de fecha...");
         try {
-            return (List<Detalles>)repoDetalles.findAllBetweenFechaRegistro(startDate, endDate);
+            return repoDetalles.listaIngresosRaw(startDate, endDate);
         } catch (Exception e) {
-            System.out.println("No se pudo obtener la lista de detalles por rango por error en aplciación!");
+            System.out.println("No se pudo obtener la lista de detalles por rango por error en aplciación por : " + e);
             return null;
         }
     }

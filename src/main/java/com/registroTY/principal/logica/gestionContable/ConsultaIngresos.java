@@ -4,7 +4,6 @@
  */
 package com.registroTY.principal.logica.gestionContable;
 
-import com.registroTY.principal.entities.Detalles;
 import com.registroTY.principal.entities.Ingreso;
 import com.registroTY.principal.services.DetallesServicioInterfaz;
 import java.util.Date;
@@ -25,11 +24,11 @@ public class ConsultaIngresos {
         this.fechaFin = fechaFin;
     }
     
-    public List<Detalles> listaIngresos(){
+    
+    public List<?> listaIngresos(){
         
-        if(servicioDetalles.ListaDetallesRango(fechaInicio, fechaFin) != null){
-            
-            List<Detalles> listaAux = servicioDetalles.ListaDetallesRango(fechaInicio, fechaFin);
+        try {
+            List<?> listaAux = servicioDetalles.ListaDetallesRango(fechaInicio, fechaFin);
             System.out.println("Lista de ingresos obtenida!");
             if(!listaAux.isEmpty()){
                 return listaAux;
@@ -37,9 +36,11 @@ public class ConsultaIngresos {
                 System.out.println("Se obtuvo lista de ingresos pero está vacía!");
                 return listaAux;
             }
-        }else{
+        } catch (Exception e) {
             System.out.println("Error al obtener ingresos...");
             return null;
         }
+        
+        
     }
 }
