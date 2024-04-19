@@ -8,7 +8,6 @@ import com.registroTY.principal.entities.Detalles;
 import com.registroTY.principal.entities.Equipo;
 import com.registroTY.principal.services.DetallesServicioInterfaz;
 import com.registroTY.principal.services.EquipoServicioInterfaz;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

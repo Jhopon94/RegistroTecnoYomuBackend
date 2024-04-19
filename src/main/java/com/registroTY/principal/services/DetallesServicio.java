@@ -48,7 +48,7 @@ public class DetallesServicio implements DetallesServicioInterfaz {
     }
 
     @Override
-    public void EliminarDetalle(int id) {
+    public void EliminarDetalle(String id) {
         
         System.out.println("Eliminando detalle...");
         try {

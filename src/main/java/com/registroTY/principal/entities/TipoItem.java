@@ -29,11 +29,8 @@ import org.hibernate.annotations.Immutable;
 public class TipoItem {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @NotNull(message="Debe especificarse el id de la entrada del ítem!")
-    @Positive
-    private Integer idEntradaItem;
+    private String id;
+    private String idEntradaItem;
     @NotBlank(message="Debe especificarse el tipo de item!")
     @Column(unique = true)
     @Pattern(regexp = "\\S+", message = "El nombre de uusario no debe llevar espacios")

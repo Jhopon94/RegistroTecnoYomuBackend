@@ -16,7 +16,7 @@ public interface DetallesServicioInterfaz {
     
     List<?> ListaDetallesRango(Date startDate, Date endDate);
     
-    void EliminarDetalle(int id);
+    void EliminarDetalle(String id);
     
     void GuardarDetalle(Detalles detalle);
     

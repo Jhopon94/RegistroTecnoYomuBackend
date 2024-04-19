@@ -35,7 +35,7 @@ public class EquipoServicio implements EquipoServicioInterfaz {
     }
 
     @Override
-    public void EliminarEquipo(int id) {
+    public void EliminarEquipo(String id) {
         
         System.out.println("Eliminando equipo...");
         try {

@@ -13,7 +13,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EquipoRepo extends CrudRepository<Equipo, Integer>{ //Integer porque el id es int
+public interface EquipoRepo extends CrudRepository<Equipo, String>{ //Integer porque el id es int
     
     //En ambas se usa native query en lugar de jpa query a voluntad.
     

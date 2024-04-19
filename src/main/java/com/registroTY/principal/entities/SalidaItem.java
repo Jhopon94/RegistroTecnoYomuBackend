@@ -27,14 +27,13 @@ import org.hibernate.annotations.Immutable;
 public class SalidaItem {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
     @NotNull(message="Debe especificarse el id del equipo donde se usó el ítem!")
     @Positive
-    private Integer idEquipo;
+    private String idEquipo;
     @NotNull(message="Debe especificarse el id del ítem en cuestión!")
     @Positive
-    private Integer idItem;
+    private String idItem;
     @NotNull(message="Debe especificarse la cantidad de tiems que salen!")
     @PositiveOrZero
     private Integer cantidad;

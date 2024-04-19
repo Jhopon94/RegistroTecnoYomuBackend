@@ -70,7 +70,7 @@ public class EquipoController {
     }
 
     @DeleteMapping("/Equipos/{id}")
-    public void EliminarEquipos(@PathVariable int id) {
+    public void EliminarEquipos(@PathVariable String id) {
 
         servicioEquipo.EliminarEquipo(id);
     }

@@ -50,18 +50,6 @@ public class ItemsServicio implements ItemsServicioInterfaz {
     
         System.out.println("Conusltando existencia de item con id: " + item.getId());
         try {
-            /*
-            Iterable<Items> listaItems = repoItems.findAll();
-            Items itemAux = new Items();
-            for(Items itemLista : listaItems){
-                itemAux = itemLista;
-            }
-            
-            if(itemAux != null){
-              return "Ya existe el ítem: " + itemAux.getNombre();
-            } return item.getNombre();
-            
-            */
            if(repoItems.existsByNombre(item.getNombre())){
                 return "Ya existe el ítem!";
             }else{

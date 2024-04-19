@@ -13,7 +13,7 @@ public interface EquipoServicioInterfaz {
     
     List<Equipo> ListaEquipos();
     
-    void EliminarEquipo(int id);
+    void EliminarEquipo(String id);
     
     Map<String, Object> GuardarEquipo(Equipo equipo);
     

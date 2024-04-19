@@ -27,11 +27,8 @@ import lombok.ToString;
 public class Detalles {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @NotNull(message="Debe especificarse el id del equipo mediante lógica!")
-    @Positive
-    private Integer idEquipo;
+    private String id;
+    private String idEquipo;
     @NotBlank(message="Debe especificarse una descripción!")
     private String descripcion;
     @NotNull

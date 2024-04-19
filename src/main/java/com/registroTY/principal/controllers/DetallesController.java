@@ -36,7 +36,7 @@ public class DetallesController {
     }
 
     @DeleteMapping("/Detalles/{id}")
-    public void EliminarDetalle(@PathVariable int id) {
+    public void EliminarDetalle(@PathVariable String id) {
 
         servicioDetalles.EliminarDetalle(id);
     }

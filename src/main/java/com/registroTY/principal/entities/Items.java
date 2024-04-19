@@ -27,8 +27,7 @@ import lombok.ToString;
 public class Items {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
     @NotBlank(message="Debe especificarse un nombre de ítem!")
     @Column(unique = true) //estblecer unico a nivel de backend también
     private String nombre;
