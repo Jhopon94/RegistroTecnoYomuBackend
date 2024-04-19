@@ -48,4 +48,5 @@ public class Empleado {
     private String foto;
     @NotNull(message="Debe determinarse por lógica su disponibilidad!")
     private Boolean disponibleParaUsuario;
+    private Boolean activo;//puede ser null porque esto se agrega con lógica
 }

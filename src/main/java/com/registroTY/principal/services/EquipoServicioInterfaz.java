@@ -16,4 +16,8 @@ public interface EquipoServicioInterfaz {
     void EliminarEquipo(int id);
     
     Map<String, Object> GuardarEquipo(Equipo equipo);
+    
+    List<Equipo> ListaEquiposIngresados();
+    
+    List<Equipo> ListaEquiposEntregados();
 }

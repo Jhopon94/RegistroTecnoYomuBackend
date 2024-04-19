@@ -8,6 +8,7 @@ package com.registroTY.principal.services;
 
 import com.registroTY.principal.entities.Detalles;
 import com.registroTY.principal.repository.DetallesRepo;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,17 @@ public class DetallesServicio implements DetallesServicioInterfaz {
         return listaDetalles;
         } catch (Exception e) {
             System.out.println("Error en la consutal de detalles por: " + e);
+            return null;
+        }
+    }
+    
+    @Override
+    public List<Detalles> ListaDetallesRango(Date startDate, Date endDate){
+        System.out.println("Consultando lista de detalles por ango de fecha...");
+        try {
+            return (List<Detalles>)repoDetalles.findAllBetweenFechaRegistro(startDate, endDate);
+        } catch (Exception e) {
+            System.out.println("No se pudo obtener la lista de detalles por rango por error en aplciación!");
             return null;
         }
     }

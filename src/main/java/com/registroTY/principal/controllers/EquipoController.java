@@ -6,6 +6,7 @@ package com.registroTY.principal.controllers;
 
 import com.registroTY.principal.entities.Detalles;
 import com.registroTY.principal.entities.Equipo;
+import com.registroTY.principal.logica.gestionEquipos.ConsultaEquipos;
 import com.registroTY.principal.logica.gestionEquipos.ContEquipoDetallesImpl;
 import com.registroTY.principal.logica.gestionEquipos.RegistroEquipo;
 import com.registroTY.principal.services.DetallesServicioInterfaz;
@@ -26,40 +27,51 @@ import org.springframework.web.bind.annotation.RestController;
 //////Controlador Principal del ojeto Equipo////////////////////
 @RestController
 public class EquipoController {
-    
+
     @Autowired
     private EquipoServicioInterfaz servicioEquipo;
     @Autowired
     private DetallesServicioInterfaz servicioDetalles;
-    
-    @GetMapping("/Equipos")
-    public List<Equipo> ListaEquipos(){
-        
-        return servicioEquipo.ListaEquipos();
+
+    @GetMapping("/Equipos/{estadoEquipo}")
+    public List<Equipo> ListaEquipos(@PathVariable String estadoEquipo) {
+
+        ConsultaEquipos consultaEquipos = new ConsultaEquipos(estadoEquipo, servicioEquipo);
+
+        //primero verificar null antes que empty para evitar exepciones
+        if (consultaEquipos.ListaEquipos() != null) {
+            List<Equipo> listaResultado = consultaEquipos.ListaEquipos();
+            if (listaResultado.isEmpty()) {
+                System.out.println("Lista encontrada pero vacía!");
+            }
+            return listaResultado;
+        }else{
+            System.out.println("Error en la variable enviada!");
+            return null;
+        }
     }
-    
+
     @PostMapping("/Equipos")
-    public Map<String, Object> GuardarEquipo(@Valid @RequestBody ContEquipoDetallesImpl contenedorObjetos, BindingResult resultado){
-        
-        if(resultado.hasErrors()){
+    public Map<String, Object> GuardarEquipo(@Valid @RequestBody ContEquipoDetallesImpl contenedorObjetos, BindingResult resultado) {
+
+        if (resultado.hasErrors()) {
             Map<String, Object> aux = new HashMap<>();
             aux.put("mensaje", "Hay algún dato incorrecto");
             aux.put("procesoExitoso", false);
             return aux;
-        }else{
+        } else {
             Equipo equipo = contenedorObjetos.getEquipo();
             List<Detalles> detalles = contenedorObjetos.getDetalles();
-    
+
             RegistroEquipo registrarEquipo = new RegistroEquipo(equipo, detalles, servicioEquipo, servicioDetalles);
             return registrarEquipo.RegistrarEquipo();
         }
-        
-        
+
     }
-    
+
     @DeleteMapping("/Equipos/{id}")
-    public void EliminarEquipos(@PathVariable int id){
-    
+    public void EliminarEquipos(@PathVariable int id) {
+
         servicioEquipo.EliminarEquipo(id);
     }
 }

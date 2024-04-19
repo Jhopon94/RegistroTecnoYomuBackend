@@ -13,7 +13,7 @@ public interface UsuarioServicioInterfaz {
     
     List<Usuario> ListaUsuarios();
     
-    void EliminarUsuario(int id);
+    String EliminarUsuario(int id);
     
     String GuardarUsuario(Usuario usuario);
     

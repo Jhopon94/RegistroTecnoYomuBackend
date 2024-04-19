@@ -44,7 +44,8 @@ public class ClienteController {
     }
     
     @PutMapping("/Clientes")
-    public String ActualizarCliente(@RequestBody Cliente cliente){
-        return servicioCliente.GuardarCliente(cliente);
+    public String ActualizarCliente(@Valid @RequestBody Cliente cliente, BindingResult resultado){
+        if(resultado.hasErrors()) return "Error al actualizar el cliente, revisa los datos ingresados!";
+        else return servicioCliente.GuardarCliente(cliente);
     }
 }

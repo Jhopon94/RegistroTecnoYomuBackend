@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,13 +24,19 @@ public class EmpleadoController {
     @Autowired
     private EmpleadoServicioInterfaz servicioEmpleado;
     
-    @GetMapping("/Empleado")
+    @GetMapping("/Empleados")
     public List<Empleado> ListaEmpleados(){
         
         return servicioEmpleado.ListaEmpleados();
     }
     
-    @PostMapping("/Empleado")
+    @PutMapping("/Empleados")
+    public String ActualizarEmpleado(@Valid @RequestBody Empleado empleado, BindingResult resultado){
+        if(resultado.hasErrors()) return "Error al editar, revisa bien la información ingresada!";
+        else return servicioEmpleado.GuardarEmpleado(empleado);
+    }
+    
+    @PostMapping("/Empleados")
     public String GuardarEmpleado(@Valid @RequestBody Empleado empleado, BindingResult resultado){
         
         if(resultado.hasErrors()){

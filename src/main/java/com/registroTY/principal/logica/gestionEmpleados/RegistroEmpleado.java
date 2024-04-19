@@ -24,7 +24,11 @@ public class RegistroEmpleado {
     public String RegistrarEmpleado(){
         
         //Primero checamos que no exista
-        if(!EmpleadoExiste()) return servicioEmpleado.GuardarEmpleado(empleado);
+        if(!EmpleadoExiste()){
+            empleado.setActivo(true); //Se marca como activo cuando se registra el empleado por primera vez
+            return servicioEmpleado.GuardarEmpleado(empleado);
+        }
+            
         else return mensaje;
     }
     

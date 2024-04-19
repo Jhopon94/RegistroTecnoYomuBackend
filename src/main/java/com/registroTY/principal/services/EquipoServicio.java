@@ -62,4 +62,26 @@ public class EquipoServicio implements EquipoServicioInterfaz {
             return resultado;
         }
     }
+
+    @Override
+    public List<Equipo> ListaEquiposIngresados() {
+        System.out.println("Consultando equipos ingresados...");
+        try {
+            return repoEquipo.EquiposIngresados();
+        } catch (Exception e) {
+            System.out.println("Error de aplicación al buscar los equipos ingresados!");
+            return null;
+        }
+    }
+
+    @Override
+    public List<Equipo> ListaEquiposEntregados() {
+        System.out.println("Consultando equipos entregados...");
+        try {
+            return repoEquipo.EquiposEntregados();
+        } catch (Exception e) {
+            System.out.println("Error de aplicación al buscar los equipos entregados!");
+            return null;
+        }
+    }
 }

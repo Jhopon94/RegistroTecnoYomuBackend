@@ -34,13 +34,14 @@ public class UsuarioServicio implements UsuarioServicioInterfaz {
     }
 
     @Override
-    public void EliminarUsuario(int id) {
+    public String EliminarUsuario(int id) {
         System.out.println("Eliminando usuario...");
         try {
-            
         repoUsuario.deleteById(id);
+        return "Usuario eliminado satisfactoriamente!";
         } catch (Exception e) {
             System.out.println("Error al eliminar usuario por: " + e);
+            return "Error de aplicación al eliminar usuario!";
         }
     }
     
