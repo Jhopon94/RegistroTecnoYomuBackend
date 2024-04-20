@@ -5,6 +5,7 @@
 package com.registroTY.principal.services;
 
 import com.registroTY.principal.entities.Equipo;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -22,4 +23,8 @@ public interface EquipoServicioInterfaz {
     List<Equipo> ListaEquiposEntregados();
     
     String UltimoIDEquipo();
+    
+    String MarcarEquipoEntregado(LocalDate fechaSalida, int diasGarantia, String id);
+    
+    int ObtenerSaldoPendiente(String id);
 }

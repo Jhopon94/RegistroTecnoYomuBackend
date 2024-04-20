@@ -12,6 +12,8 @@ import com.registroTY.principal.logica.gestionEquipos.RegistroEquipo;
 import com.registroTY.principal.services.DetallesServicioInterfaz;
 import com.registroTY.principal.services.EquipoServicioInterfaz;
 import jakarta.validation.Valid;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,57 +23,88 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 //////Controlador Principal del ojeto Equipo////////////////////
 @RestController
 public class EquipoController {
 
-    @Autowired
-    private EquipoServicioInterfaz servicioEquipo;
-    @Autowired
-    private DetallesServicioInterfaz servicioDetalles;
+   @Autowired
+   private EquipoServicioInterfaz servicioEquipo;
+   @Autowired
+   private DetallesServicioInterfaz servicioDetalles;
 
-    @GetMapping("/Equipos/{estadoEquipo}")
-    public List<Equipo> ListaEquipos(@PathVariable String estadoEquipo) {
+   @GetMapping("/Equipos/{estadoEquipo}")
+   public List<Equipo> ListaEquipos(@PathVariable String estadoEquipo) {
 
-        ConsultaEquipos consultaEquipos = new ConsultaEquipos(estadoEquipo, servicioEquipo);
+      ConsultaEquipos consultaEquipos = new ConsultaEquipos(estadoEquipo, servicioEquipo);
 
-        //primero verificar null antes que empty para evitar exepciones
-        if (consultaEquipos.ListaEquipos() != null) {
-            List<Equipo> listaResultado = consultaEquipos.ListaEquipos();
-            if (listaResultado.isEmpty()) {
-                System.out.println("Lista encontrada pero vacía!");
+      //primero verificar null antes que empty para evitar exepciones
+      if (consultaEquipos.ListaEquipos() != null) {
+         List<Equipo> listaResultado = consultaEquipos.ListaEquipos();
+         if (listaResultado.isEmpty()) {
+            System.out.println("Lista encontrada pero vacía!");
+         }
+         return listaResultado;
+      } else {
+         System.out.println("Error en la variable enviada!");
+         return null;
+      }
+   }
+
+   @PostMapping("/Equipos")
+   public Map<String, Object> GuardarEquipo(@Valid @RequestBody ContEquipoDetallesImpl contenedorObjetos, BindingResult resultado) {
+
+      if (resultado.hasErrors()) {
+         Map<String, Object> aux = new HashMap<>();
+         aux.put("mensaje", "Hay algún dato incorrecto");
+         aux.put("procesoExitoso", false);
+         return aux;
+      } else {
+         Equipo equipo = contenedorObjetos.getEquipo();
+         List<Detalles> detalles = contenedorObjetos.getDetalles();
+
+         RegistroEquipo registrarEquipo = new RegistroEquipo(equipo, detalles, servicioEquipo, servicioDetalles);
+         return registrarEquipo.RegistrarEquipo();
+      }
+
+   }
+
+   @DeleteMapping("/Equipos/{id}")
+   public void EliminarEquipos(@PathVariable String id) {
+
+      servicioEquipo.EliminarEquipo(id);
+   }
+
+   @PutMapping("/Equipos")
+   public String EquipoEntregado(@RequestBody List<String> objetos) {
+
+      String fecha = objetos.get(0);
+      String diasGarantiaTexto = objetos.get(1);
+      String id = objetos.get(2);
+      int diasGarantia = Integer.parseInt(diasGarantiaTexto);
+
+      int saldoEquipo = servicioEquipo.ObtenerSaldoPendiente(id);
+
+      if (saldoEquipo != 333) {
+
+         if (saldoEquipo == 0) {
+            try {
+               DateTimeFormatter formateador = DateTimeFormatter.ofPattern("ddMMyyyy");
+               LocalDate fechaFormateada = LocalDate.parse(fecha, formateador);
+               return servicioEquipo.MarcarEquipoEntregado(fechaFormateada, diasGarantia, id);
+            } catch (Exception e) {
+               return "Error en en la conversión de la fecha o envío de parámetros!";
             }
-            return listaResultado;
-        }else{
-            System.out.println("Error en la variable enviada!");
-            return null;
-        }
-    }
+         }else{
+            return "No se puede marcar como entregado porque el cliente aún debe " + saldoEquipo + " pesos!";
+         }
 
-    @PostMapping("/Equipos")
-    public Map<String, Object> GuardarEquipo(@Valid @RequestBody ContEquipoDetallesImpl contenedorObjetos, BindingResult resultado) {
-
-        if (resultado.hasErrors()) {
-            Map<String, Object> aux = new HashMap<>();
-            aux.put("mensaje", "Hay algún dato incorrecto");
-            aux.put("procesoExitoso", false);
-            return aux;
-        } else {
-            Equipo equipo = contenedorObjetos.getEquipo();
-            List<Detalles> detalles = contenedorObjetos.getDetalles();
-
-            RegistroEquipo registrarEquipo = new RegistroEquipo(equipo, detalles, servicioEquipo, servicioDetalles);
-            return registrarEquipo.RegistrarEquipo();
-        }
-
-    }
-
-    @DeleteMapping("/Equipos/{id}")
-    public void EliminarEquipos(@PathVariable String id) {
-
-        servicioEquipo.EliminarEquipo(id);
-    }
+      } else {
+         return "Error al consultar el saldo de " + id;
+      }
+   }
 }

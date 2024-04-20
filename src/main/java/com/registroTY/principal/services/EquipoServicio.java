@@ -8,6 +8,7 @@ package com.registroTY.principal.services;
 
 import com.registroTY.principal.entities.Equipo;
 import com.registroTY.principal.repository.EquipoRepo;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,5 +105,29 @@ public class EquipoServicio implements EquipoServicioInterfaz {
             System.out.println("No se pudo comprobar los registros de equipo por error de consulta...");
             return null;
         }
+    }
+    
+    @Override
+    public String MarcarEquipoEntregado(LocalDate fechaSalida, int diasGarantia, String id){
+       System.out.println("Vamos a marcar el " + id + " como entregado!");
+       try {
+          int i = repoEquipo.MarcarEquipoEntregado(fechaSalida, diasGarantia, id);
+          System.out.println(i);
+          return "El " + id + " marcado como entregado satisfactoriamente!";
+       } catch (Exception e) {
+          System.out.println("No se pudo marcar el equipo como entregado por: " + e);
+          return "Error de aplicación al marcar el " + id + " como entregado";
+       }
+    }
+    
+    @Override
+    public int ObtenerSaldoPendiente(String id){
+       System.out.println("Obteniendo saldo pendiente de " + id);
+       try {
+          return repoEquipo.SaldoPendiente(id);
+       } catch (Exception e) {
+          System.out.println("Error al obtener el saldo pendiente de " + id + " por: " + e);
+          return 333;//solo apra devolver algo e informar que hubo error
+       }
     }
 }

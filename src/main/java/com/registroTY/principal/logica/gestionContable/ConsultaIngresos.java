@@ -11,11 +11,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import org.hibernate.annotations.Array;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 public class ConsultaIngresos {
 
