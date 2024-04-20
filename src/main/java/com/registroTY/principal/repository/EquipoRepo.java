@@ -45,4 +45,10 @@ public interface EquipoRepo extends CrudRepository<Equipo, String>{ //Integer po
     
     @Query(value = "SELECT e.id, e.modelo, e.saldoPendiente, e.fechaIngreso FROM equipo e INNER JOIN cliente c ON c.id = e.idCliente WHERE e.saldoPendiente > 0", nativeQuery = true)
     List<Map<String, Object>> ListaEquiposDeudor();
+    
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE equipo SET saldoPendiente = ?1 WHERE id=?2", nativeQuery = true)
+    int RegistrarAbono(int saldoCalculado, String id);
+    
 }

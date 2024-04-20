@@ -32,4 +32,6 @@ public interface EquipoServicioInterfaz {
     
     List<Map<String, Object>> EquiposAdeudados();
     
+    String RegistrarAbonoEnEquipo(int abono, String id);
+    
 }

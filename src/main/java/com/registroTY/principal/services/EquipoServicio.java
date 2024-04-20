@@ -153,4 +153,23 @@ public class EquipoServicio implements EquipoServicioInterfaz {
           return null;
        }
     }
+    
+    @Override
+    public String RegistrarAbonoEnEquipo(int abono, String id){
+       System.out.println("Actualizaremos el saldo pendiente del equipo en cuestión...");
+       try {
+          int saldoPendiente = ObtenerSaldoPendiente(id);
+          int saldoFinal = saldoPendiente - abono;
+          if(saldoFinal >= 0 && abono > 0){
+             repoEquipo.RegistrarAbono(saldoFinal, id);
+             return "Abono registrado con éxito!";
+          }else{
+             System.out.println("El abono es más grande que la deuda por " + (abono-saldoPendiente) + " pesos!");
+             return "El saldo pendiente es solo de " + saldoPendiente + " pesos!";
+          }
+       } catch (Exception e) {
+          System.out.println("Error al registrar el abono por: " + e);
+          return null;
+       }
+    }
 }

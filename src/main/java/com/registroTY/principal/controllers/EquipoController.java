@@ -15,7 +15,6 @@ import com.registroTY.principal.services.EquipoServicioInterfaz;
 import jakarta.validation.Valid;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,13 +89,14 @@ public class EquipoController {
       //para determinar que key contiene el Map
       boolean marcarEntregado = opciones.containsKey("marcarEntregado");
       boolean edicion = opciones.containsKey("actualizar");
+      boolean abono = opciones.containsKey("abono");
 
       //Si se envió un Marcar como Entregado!
-      if (marcarEntregado && !edicion) {
+      if (marcarEntregado) {
 
          //saco los datos apra marcar entregado
          Map<String, Object> objetos = opciones.get("marcarEntregado");
-         
+
          String fecha = objetos.get("fecha").toString();
          String diasGarantiaTexto = objetos.get("diasGarantia").toString();
          String id = objetos.get("id").toString();
@@ -122,27 +122,31 @@ public class EquipoController {
             return "Error al consultar el saldo de " + id;
          }
 
-      }else if(!marcarEntregado && edicion){ //Se envió para edición
-         
+      } else if (edicion) { //Se envió para edición
+
          //sacamos el contenedor en forma de map para ser enviado a la función post
          Map<String, Object> contenedorCrudo = opciones.get("contenedor");
          //Lo casteamos al tipo de objeto automaticamente con SPRING
          ContEquipoDetallesImpl contenedor = mapeadorObjetos.convertValue(contenedorCrudo, ContEquipoDetallesImpl.class);
          //Creamos el BindingResult falso para enviar
          BindingResult resultadoFalso = new BeanPropertyBindingResult(contenedor, "contenedor");
-         
+
          //Para obtner el resultado del registro del equipo al registrarlo de una vez:
          Map<String, Object> resultadoRegistroEquipo = GuardarEquipo(contenedor, resultadoFalso);
          //Si el registro del equipo fue exitoso
-         if((boolean)resultadoRegistroEquipo.get("procesoExitoso")){
+         if ((boolean) resultadoRegistroEquipo.get("procesoExitoso")) {
             //Obtenemos lista de ids y las casteamos a list int
-            List<Integer> listaIDS = (List<Integer>)contenedorCrudo.get("detalles");
+            List<Integer> listaIDS = (List<Integer>) contenedorCrudo.get("detalles");
             return servicioDetalles.EliminarVariosDetalles(listaIDS);
-         }else{
+         } else {
             System.out.println("No se pudo actualizar el equipo, por ende no se eliminaron detalles");
          }
+      } else if (abono) {
+         int abonoValor = Integer.parseInt(opciones.get("abono").get("valor").toString());
+         String idEquipoAbono = opciones.get("abono").get("id").toString();
+         return servicioEquipo.RegistrarAbonoEnEquipo(abonoValor, idEquipoAbono);
       }
       return "prueba";
    }
-   
+
 }
