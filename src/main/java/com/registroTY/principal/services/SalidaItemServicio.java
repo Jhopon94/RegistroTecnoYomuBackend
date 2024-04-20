@@ -9,6 +9,7 @@ package com.registroTY.principal.services;
 import com.registroTY.principal.entities.SalidaItem;
 import com.registroTY.principal.repository.SalidaItemRepo;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +42,23 @@ public class SalidaItemServicio implements SalidaItemServicioInterfaz {
         } catch (Exception e) {
             System.out.println("Error al guardar salida de ítem por: " + e);
         }
+    }
+    
+    @Override
+    public String UltimaSalidaItem(){
+       System.out.println("Consultando la última salida de ítem...");
+       try {
+          if(repoSalidaItem.UltimaSalidaItem().isPresent()){
+             SalidaItem salidaItem = repoSalidaItem.UltimaSalidaItem().get();
+             System.out.println("Se obtuvo el ultimo registro de salida ítem satisfactoriamente!");
+             return salidaItem.getId();
+          }else{
+             System.out.println("No hay registros en la tabla de salida item...");
+             return "";
+          }
+       } catch (Exception e) {
+          System.out.println("No se pudo obtener la última salida de ítem por: " + e);
+          return null;
+       }
     }
 }

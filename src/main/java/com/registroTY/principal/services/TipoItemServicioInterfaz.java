@@ -6,6 +6,7 @@ package com.registroTY.principal.services;
 
 import com.registroTY.principal.entities.TipoItem;
 import java.util.List;
+import java.util.Optional;
 
 ///////Este interfaz es solo para que se vea mas ordenado y bonito ////////////
 public interface TipoItemServicioInterfaz {
@@ -15,4 +16,6 @@ public interface TipoItemServicioInterfaz {
     String GuardarTipoItem(TipoItem tipoItem);
     
     String ConsultarExistenciaTipoItem(TipoItem tipoItem);
+    
+    String ConsultarUltimoTipoItem();
 }

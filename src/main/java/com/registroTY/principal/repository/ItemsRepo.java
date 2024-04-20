@@ -7,6 +7,8 @@ package com.registroTY.principal.repository;
 //////////////Esta interface nos evita escribir las sentencias sql ////////////////////
 
 import com.registroTY.principal.entities.Items;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +19,7 @@ public interface ItemsRepo extends CrudRepository<Items, String>{ //Integer porq
     y me genera una búsqueda por "nombre", donde este nombre es la columna donde deseo buscar que 
     me imagino debería ser igual a la variable*/
     boolean existsByNombre(String nombre);
+    
+    @Query(value = "SELECT * FROM items ORDER BY fechaCreacion DESC LIMIT 1", nativeQuery = true)
+    Optional<Items> UltimoItem();
 }

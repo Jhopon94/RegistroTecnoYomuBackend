@@ -9,6 +9,7 @@ package com.registroTY.principal.services;
 import com.registroTY.principal.entities.Items;
 import com.registroTY.principal.repository.ItemsRepo;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,5 +60,24 @@ public class ItemsServicio implements ItemsServicioInterfaz {
             System.out.println("No se encontró item por: " + e);
             return "No se pudo verificar la existencia del ítem por error en la aplicación";
         }
+    }
+    
+    @Override
+    public String findUltimoItem(){
+       System.out.println("Consultando el último ítem registrado!...");
+       try {
+          Items item = new Items();
+          if(repoItems.UltimoItem().isPresent()){
+             System.out.println("Adquirido el último item");
+             item = repoItems.UltimoItem().get();
+             return item.getId();
+          }else{
+               System.out.println("No hay registros...");
+               return "";
+          }
+       } catch (Exception e) {
+          System.out.println("No se pudo obtener el último ítem por error de la aplciación: " + e);
+          return null;
+       }
     }
 }

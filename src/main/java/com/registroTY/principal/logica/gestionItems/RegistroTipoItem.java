@@ -5,6 +5,7 @@
 package com.registroTY.principal.logica.gestionItems;
 
 import com.registroTY.principal.entities.TipoItem;
+import com.registroTY.principal.logica.TresUltimos;
 import com.registroTY.principal.services.TipoItemServicioInterfaz;
 
 
@@ -24,7 +25,10 @@ public class RegistroTipoItem {
     public String RegistrarTipoItem(){
     
         //Si tipoItem no existe
-        if(!TipoItemExiste()) return servicioTipoItem.GuardarTipoItem(tipoItem);
+        if(!TipoItemExiste()){
+           EstablecerIDTipoItem(servicioTipoItem.ConsultarUltimoTipoItem());
+           return servicioTipoItem.GuardarTipoItem(tipoItem);
+        } 
         else return mensaje;
     }
     
@@ -33,5 +37,15 @@ public class RegistroTipoItem {
         mensaje = servicioTipoItem.ConsultarExistenciaTipoItem(tipoItem);
         //Si se devuelve el nombre del tipoItem
         return !mensaje.equals(tipoItem.getTipoDeItem());
+    }
+    
+    public void EstablecerIDTipoItem(String id){
+       if(id != null){
+          if(id.equals("")){
+             tipoItem.setId("tipoItem000");
+          }else{
+             tipoItem.setId(new TresUltimos().IdNuevo(id));
+          }
+       }
     }
 }
