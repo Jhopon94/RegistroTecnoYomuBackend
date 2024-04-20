@@ -126,10 +126,8 @@ public class EquipoController {
          
          //sacamos el contenedor en forma de map para ser enviado a la función post
          Map<String, Object> contenedorCrudo = opciones.get("contenedor");
-         //Sacamos el contenedor Equipo Detalles
-         Map<String, Object> contenedorRegistro = (Map<String, Object>)contenedorCrudo.get("contenedoRegistro");
          //Lo casteamos al tipo de objeto automaticamente con SPRING
-         ContEquipoDetallesImpl contenedor = mapeadorObjetos.convertValue(contenedorRegistro, ContEquipoDetallesImpl.class);
+         ContEquipoDetallesImpl contenedor = mapeadorObjetos.convertValue(contenedorCrudo, ContEquipoDetallesImpl.class);
          //Creamos el BindingResult falso para enviar
          BindingResult resultadoFalso = new BeanPropertyBindingResult(contenedor, "contenedor");
          
