@@ -6,6 +6,7 @@ package com.registroTY.principal.services;
 
 import com.registroTY.principal.entities.Detalles;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -22,5 +23,7 @@ public interface DetallesServicioInterfaz {
     void GuardarDetalle(Detalles detalle);
     
     Map<String, Object> GuardarVariosDetalles(List<Detalles> detalles);
+    
+    String EliminarVariosDetalles(List<Integer> lista);
     
 }

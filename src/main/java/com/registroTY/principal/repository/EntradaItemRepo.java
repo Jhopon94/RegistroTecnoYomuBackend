@@ -17,4 +17,6 @@ public interface EntradaItemRepo extends CrudRepository<EntradaItem, String>{ //
     
     @Query(value = "SELECT * FROM entradaItem ORDER BY fechaCompra DESC LIMIT 1", nativeQuery = true)
     Optional<EntradaItem> UltimaEntradaItem();
+    
+    
 }

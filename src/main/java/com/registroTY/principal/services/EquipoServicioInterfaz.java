@@ -27,4 +27,5 @@ public interface EquipoServicioInterfaz {
     String MarcarEquipoEntregado(LocalDate fechaSalida, int diasGarantia, String id);
     
     int ObtenerSaldoPendiente(String id);
+    
 }
