@@ -6,14 +6,15 @@ package com.registroTY.principal.services;
 
 import com.registroTY.principal.entities.EntradaItem;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 ///////Este interfaz es solo para que se vea mas ordenado y bonito ////////////
 public interface EntradaItemServicioInterfaz {
     
-    List<EntradaItem> ListaEntradaItem();
+    List<Map<String, String>> ListaEntradaItem();
     
     void GuardarEntradaItem(EntradaItem entradaItem);
     
     String UltimaCompra();
+    
 }

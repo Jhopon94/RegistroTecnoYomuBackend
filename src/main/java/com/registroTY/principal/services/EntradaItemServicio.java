@@ -9,7 +9,7 @@ package com.registroTY.principal.services;
 import com.registroTY.principal.entities.EntradaItem;
 import com.registroTY.principal.repository.EntradaItemRepo;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +21,11 @@ public class EntradaItemServicio implements EntradaItemServicioInterfaz {
     private EntradaItemRepo repoEntradaItem;
     
     @Override
-    public List<EntradaItem> ListaEntradaItem(){
+    public List<Map<String, String>> ListaEntradaItem(){
         
         System.out.println("Consultando lista de las entradas de los items...");
         try {
-        List<EntradaItem> listaEntradasItem = (List<EntradaItem>) repoEntradaItem.findAll();
-        return listaEntradasItem;
+        return repoEntradaItem.HistorialCompras();
         } catch (Exception e) {
             System.out.println("Error al obtener lista de entradas de items por: " + e);
             return null;
@@ -44,6 +43,7 @@ public class EntradaItemServicio implements EntradaItemServicioInterfaz {
         }
     }
     
+    
     @Override
     public String UltimaCompra(){
        System.out.println("Obteniendo el último registro de entrada de item...");
@@ -51,7 +51,7 @@ public class EntradaItemServicio implements EntradaItemServicioInterfaz {
           if(repoEntradaItem.UltimaEntradaItem().isPresent()){
              EntradaItem entradaItem = repoEntradaItem.UltimaEntradaItem().get();
              System.out.println("Encontrado el registro de la última entradaItem!");
-             return entradaItem.getId();
+             return entradaItem.getId() + "";
           }else{
              System.out.println("No hay registros en la tabla tipoItem!");
              return "";

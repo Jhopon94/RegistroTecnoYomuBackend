@@ -7,6 +7,7 @@ package com.registroTY.principal.controllers;
 import com.registroTY.principal.entities.EntradaItem;
 import com.registroTY.principal.services.EntradaItemServicioInterfaz;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ public class EntradaItemController {
     private EntradaItemServicioInterfaz servicioEntradaItem;
     
     @GetMapping("/EntradaItem")
-    public List<EntradaItem> ListaEntradasItem(){
+    public List<Map<String, String>> ListaEntradasItem(){
         
         return servicioEntradaItem.ListaEntradaItem();
     }

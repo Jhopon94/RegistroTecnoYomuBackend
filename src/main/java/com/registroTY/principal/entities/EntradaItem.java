@@ -28,7 +28,8 @@ import org.hibernate.annotations.Immutable;
 public class EntradaItem {
     
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String idItem;
     @NotNull(message="Debe especificarse la cantidad de items entrantes!")
     @Positive

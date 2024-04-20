@@ -7,6 +7,8 @@ package com.registroTY.principal.repository;
 //////////////Esta interface nos evita escribir las sentencias sql ////////////////////
 
 import com.registroTY.principal.entities.EntradaItem;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -18,5 +20,7 @@ public interface EntradaItemRepo extends CrudRepository<EntradaItem, String>{ //
     @Query(value = "SELECT * FROM entradaItem ORDER BY fechaCompra DESC LIMIT 1", nativeQuery = true)
     Optional<EntradaItem> UltimaEntradaItem();
     
-    
+    @Query(value = "SELECT entradaItem.*, items.nombre, items.descripcion FROM entradaItem "
+            + "INNER JOIN items ON entradaItem.idItem = items.id ", nativeQuery = true)
+    List<Map<String, String>> HistorialCompras();
 }
