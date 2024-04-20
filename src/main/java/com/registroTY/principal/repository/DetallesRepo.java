@@ -29,4 +29,8 @@ public interface DetallesRepo extends CrudRepository<Detalles, Integer>{ //Integ
             "INNER JOIN cliente c ON e.idCliente = c.id " + 
             "WHERE d.fechaRegistro BETWEEN ?1 AND ?2", nativeQuery = true)
     List<Map<String, Object>> listaIngresosRaw(LocalDate fechaInicio, LocalDate fechaFin);
+    
+    @Query(value = "SELECT d.descripcion, d.precio FROM detalles d INNER JOIN equipo e ON e.id = d.idEquipo "
+            + "WHERE e.id = ?1", nativeQuery = true)
+    List<Map<String, Object>> ListaDetallesDeudor(String id);
 }

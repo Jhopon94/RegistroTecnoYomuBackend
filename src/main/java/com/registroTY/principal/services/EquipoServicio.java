@@ -130,4 +130,27 @@ public class EquipoServicio implements EquipoServicioInterfaz {
           return 333;//solo apra devolver algo e informar que hubo error
        }
     }
+    
+    @Override
+    public List<Map<String, Object>> ObtenerDatosDeudores(){
+    
+       System.out.println("Vamos a obtener los datos de los deudores...");
+       try {
+          return repoEquipo.DatosDeudores();
+       } catch (Exception e) {
+          System.out.println("No se pudo obtener los datos de los deudores por: + e");
+          return null;
+       }
+    }
+    
+    @Override
+    public List<Map<String, Object>> EquiposAdeudados(){
+       System.out.println("Obteniendo los equipos adeudados por el cliente...");
+       try {
+          return repoEquipo.ListaEquiposDeudor();
+       } catch (Exception e) {
+          System.out.println("Error al obtener los equipos adeudados por: " + e);
+          return null;
+       }
+    }
 }

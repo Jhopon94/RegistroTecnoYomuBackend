@@ -28,4 +28,8 @@ public interface EquipoServicioInterfaz {
     
     int ObtenerSaldoPendiente(String id);
     
+    List<Map<String, Object>> ObtenerDatosDeudores();
+    
+    List<Map<String, Object>> EquiposAdeudados();
+    
 }

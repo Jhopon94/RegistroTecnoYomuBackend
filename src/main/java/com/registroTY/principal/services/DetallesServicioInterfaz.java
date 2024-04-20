@@ -26,4 +26,5 @@ public interface DetallesServicioInterfaz {
     
     String EliminarVariosDetalles(List<Integer> lista);
     
+    List<Map<String, Object>> DetallesEquipoAdeudado(String id);
 }

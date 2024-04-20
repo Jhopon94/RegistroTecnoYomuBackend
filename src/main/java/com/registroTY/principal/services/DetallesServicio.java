@@ -95,4 +95,15 @@ public class DetallesServicio implements DetallesServicioInterfaz {
          return "No se puedo eliminar la lsita de detalles por error en la aplicación!";
       }
    }
+
+   @Override
+   public List<Map<String, Object>> DetallesEquipoAdeudado(String id) {
+      System.out.println("Obteniendo los detalles del equipo con saldo pendiente...");
+      try {
+         return repoDetalles.ListaDetallesDeudor(id);
+      } catch (Exception e) {
+         System.out.println("No se pudo obtener los detalles del equipo adeudado por: " + e);
+         return null;
+      }
+   }
 }

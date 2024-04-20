@@ -10,6 +10,7 @@ import com.registroTY.principal.entities.Equipo;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -37,4 +38,11 @@ public interface EquipoRepo extends CrudRepository<Equipo, String>{ //Integer po
     
     @Query(value = "SELECT saldoPendiente FROM equipo WHERE id = ?1", nativeQuery = true)
     int SaldoPendiente(String id);
+    
+    @Query(value = "SELECT c.id, c.nombre FROM equipo e INNER JOIN "
+            + "cliente c ON c.id = e.idCliente WHERE e.saldoPendiente > 0", nativeQuery = true)
+    List<Map<String, Object>> DatosDeudores();
+    
+    @Query(value = "SELECT e.id, e.modelo, e.saldoPendiente, e.fechaIngreso FROM equipo e INNER JOIN cliente c ON c.id = e.idCliente WHERE e.saldoPendiente > 0", nativeQuery = true)
+    List<Map<String, Object>> ListaEquiposDeudor();
 }

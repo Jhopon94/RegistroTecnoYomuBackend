@@ -4,9 +4,10 @@
  */
 package com.registroTY.principal.controllers;
 
-import com.registroTY.principal.entities.Ingreso;
 import com.registroTY.principal.logica.gestionContable.ConsultaIngresos;
+import com.registroTY.principal.logica.gestionContable.ConsultarDeudores;
 import com.registroTY.principal.services.DetallesServicioInterfaz;
+import com.registroTY.principal.services.EquipoServicioInterfaz;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -20,9 +21,11 @@ public class DatosContablesController {
 
     @Autowired
     private DetallesServicioInterfaz servicioDetalles;
+    @Autowired
+    private EquipoServicioInterfaz servicioEquipo;
 
     @GetMapping("/DatosContables/{peticionLista}/{fechaInicioString}/{fechaFinString}")
-    public List<Ingreso> ListaRequerida(@PathVariable String peticionLista, @PathVariable String fechaInicioString, @PathVariable String fechaFinString) {
+    public List<?> ListaRequerida(@PathVariable String peticionLista, @PathVariable String fechaInicioString, @PathVariable String fechaFinString) {
         switch (peticionLista) {
             case "ingresos":
                 //Si se piden ingresos, se intenta parsear las fechas
@@ -41,9 +44,10 @@ public class DatosContablesController {
                     return null;
                 }
             case "compras":
+               
                 return null;
             case "deudores":
-                return null;
+                  return new ConsultarDeudores(servicioEquipo, servicioDetalles).ListaDeudoresFull();
             default:
                 throw new AssertionError();
         }
