@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -27,12 +28,11 @@ import org.hibernate.annotations.Immutable;
 public class SalidaItem {
     
     @Id
-    private String id;
-    @NotNull(message="Debe especificarse el id del equipo donde se usó el ítem!")
-    @Positive
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @NotBlank(message="Debe especificarse el id del equipo donde se usó el ítem!")
     private String idEquipo;
-    @NotNull(message="Debe especificarse el id del ítem en cuestión!")
-    @Positive
+    @NotBlank(message="Debe especificarse el id del ítem en cuestión!")
     private String idItem;
     @NotNull(message="Debe especificarse la cantidad de tiems que salen!")
     @PositiveOrZero

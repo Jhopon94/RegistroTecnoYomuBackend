@@ -13,7 +13,11 @@ public interface SalidaItemServicioInterfaz {
     
     List<SalidaItem> ListaSalidasItem();
     
-    void GuardarSalidaItem(SalidaItem salidaItem);
+    boolean GuardarSalidaItem(SalidaItem salidaItem);
     
-    String UltimaSalidaItem();
+    int UltimaSalidaItem();
+    
+    boolean EliminarRegsitroSalidaItem(int id);
+    
+    int ObtenerUltimoID();
 }
