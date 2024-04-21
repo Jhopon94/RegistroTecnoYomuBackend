@@ -8,6 +8,7 @@ package com.registroTY.principal.services;
 
 import com.registroTY.principal.entities.EntradaItem;
 import com.registroTY.principal.repository.EntradaItemRepo;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,17 @@ public class EntradaItemServicio implements EntradaItemServicioInterfaz {
           }
        } catch (Exception e) {
           System.out.println("No se puedo obtener el ultimo registro de entradaItem por error en la aplicación por: " + e);
+          return null;
+       }
+    }
+    
+    @Override
+    public List<Map<String, Object>> ListaCompras(LocalDate fechaInicio, LocalDate fechaFin){
+       System.out.println("Otteniendo la lista de las compras con el nombre del item incluido...");
+       try {
+          return repoEntradaItem.ListaCompras(fechaInicio,fechaFin);
+       } catch (Exception e) {
+          System.out.println("No se pudo obtener la lsita d elas compras por: " + e);
           return null;
        }
     }

@@ -5,6 +5,7 @@
 package com.registroTY.principal.services;
 
 import com.registroTY.principal.entities.EntradaItem;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -16,5 +17,7 @@ public interface EntradaItemServicioInterfaz {
     boolean GuardarEntradaItem(EntradaItem entradaItem);
     
     String UltimaCompra();
+    
+    List<Map<String, Object>> ListaCompras(LocalDate fechaInicio, LocalDate fechaFin);
     
 }

@@ -7,6 +7,7 @@ package com.registroTY.principal.repository;
 //////////////Esta interface nos evita escribir las sentencias sql ////////////////////
 
 import com.registroTY.principal.entities.EntradaItem;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -23,4 +24,8 @@ public interface EntradaItemRepo extends CrudRepository<EntradaItem, String>{ //
     @Query(value = "SELECT entradaItem.*, items.nombre, items.descripcion FROM entradaItem "
             + "INNER JOIN items ON entradaItem.idItem = items.id ", nativeQuery = true)
     List<Map<String, String>> HistorialCompras();
+    
+    @Query(value = "SELECT ei.*, i.nombre FROM entradaItem ei INNER JOIN items i ON i.id = ei.idItem "
+            + "WHERE ei.fechaCompra BETWEEN ?1 AND ?2", nativeQuery = true)
+    List<Map<String, Object>> ListaCompras(LocalDate fechaInicio, LocalDate fechaFin);
 }
