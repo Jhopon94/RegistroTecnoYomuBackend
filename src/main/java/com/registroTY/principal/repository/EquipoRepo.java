@@ -51,4 +51,9 @@ public interface EquipoRepo extends CrudRepository<Equipo, String>{ //Integer po
     @Query(value = "UPDATE equipo SET saldoPendiente = ?1 WHERE id=?2", nativeQuery = true)
     int RegistrarAbono(int saldoCalculado, String id);
     
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE equipo SET estadoEquipo = ?1 WHERE id=?2", nativeQuery = true)
+    void CambiarEstado(String estado, String id);
+    
 }

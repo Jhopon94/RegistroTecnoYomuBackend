@@ -172,4 +172,16 @@ public class EquipoServicio implements EquipoServicioInterfaz {
           return null;
        }
     }
+    
+    @Override
+    public String CambiarEstadoEquipo(String estado, String id){
+       System.out.println("Cambiando el estado del equipo a " + estado);
+       try {
+          repoEquipo.CambiarEstado(estado, id);
+          return "Estado cambiado a " + estado + " satisfactoriamente";
+       } catch (Exception e) {
+          System.out.println("Error al cambiar el estado del equipo por: " + e);
+          return "Error de aplicación al cambiar el estado del equipo!";
+       }
+    }
 }

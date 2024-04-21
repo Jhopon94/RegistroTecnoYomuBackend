@@ -90,6 +90,7 @@ public class EquipoController {
       boolean marcarEntregado = opciones.containsKey("marcarEntregado");
       boolean edicion = opciones.containsKey("actualizar");
       boolean abono = opciones.containsKey("abono");
+      boolean cambiarEstado = opciones.containsKey("cambiarEstado");
 
       //Si se envió un Marcar como Entregado!
       if (marcarEntregado) {
@@ -145,6 +146,10 @@ public class EquipoController {
          int abonoValor = Integer.parseInt(opciones.get("abono").get("valor").toString());
          String idEquipoAbono = opciones.get("abono").get("id").toString();
          return servicioEquipo.RegistrarAbonoEnEquipo(abonoValor, idEquipoAbono);
+      }else if(cambiarEstado){
+         String estado = opciones.get("cambiarEstado").get("estado").toString();
+         String idEquipoEstado = opciones.get("cambiarEstado").get("id").toString();
+         return servicioEquipo.CambiarEstadoEquipo(estado, idEquipoEstado);
       }
       return "prueba";
    }

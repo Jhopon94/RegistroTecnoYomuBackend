@@ -34,4 +34,6 @@ public interface EquipoServicioInterfaz {
     
     String RegistrarAbonoEnEquipo(int abono, String id);
     
+    String CambiarEstadoEquipo(String estado, String id);
+    
 }
