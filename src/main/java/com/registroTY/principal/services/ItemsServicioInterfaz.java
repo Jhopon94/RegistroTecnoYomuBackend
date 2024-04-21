@@ -13,9 +13,11 @@ public interface ItemsServicioInterfaz {
     
     List<Items> ListaItems();
     
-    String GuardarItem(Items item);
+    boolean GuardarItem(Items item);
     
     String ConsultarExistenciaItem(Items item);
     
     String findUltimoItem();
+    
+    boolean BorrarItem(String id);
 }

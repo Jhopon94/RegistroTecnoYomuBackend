@@ -13,7 +13,7 @@ public interface EntradaItemServicioInterfaz {
     
     List<Map<String, String>> ListaEntradaItem();
     
-    void GuardarEntradaItem(EntradaItem entradaItem);
+    boolean GuardarEntradaItem(EntradaItem entradaItem);
     
     String UltimaCompra();
     

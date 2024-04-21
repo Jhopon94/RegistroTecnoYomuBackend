@@ -24,6 +24,7 @@ public class DatosContablesController {
     @Autowired
     private EquipoServicioInterfaz servicioEquipo;
 
+    //Para el caso de deudores que nor equiere fecha, poner /deudores/0/0 en el front
     @GetMapping("/DatosContables/{peticionLista}/{fechaInicioString}/{fechaFinString}")
     public List<?> ListaRequerida(@PathVariable String peticionLista, @PathVariable String fechaInicioString, @PathVariable String fechaFinString) {
         switch (peticionLista) {

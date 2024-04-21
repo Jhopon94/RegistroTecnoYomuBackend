@@ -33,13 +33,15 @@ public class EntradaItemServicio implements EntradaItemServicioInterfaz {
     }
 
     @Override
-    public void GuardarEntradaItem(EntradaItem entradaItem) {
+    public boolean GuardarEntradaItem(EntradaItem entradaItem) {
         
         System.out.println("Guardando entrada de item...");
         try {
         repoEntradaItem.save(entradaItem);
+        return true;
         } catch (Exception e) {
             System.out.println("Error al guardar entrada de ítem por: " + e);
+            return false;
         }
     }
     

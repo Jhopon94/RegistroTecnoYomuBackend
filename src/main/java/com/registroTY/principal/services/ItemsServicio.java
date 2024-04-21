@@ -9,7 +9,6 @@ package com.registroTY.principal.services;
 import com.registroTY.principal.entities.Items;
 import com.registroTY.principal.repository.ItemsRepo;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,22 +33,22 @@ public class ItemsServicio implements ItemsServicioInterfaz {
     }
 
     @Override
-    public String GuardarItem(Items item) {
+    public boolean GuardarItem(Items item) {
         
         System.out.println("Guardando ítem...");
         try {
         repoItems.save(item);
-        return "Item registrado correctamente";
+        return true;
         } catch (Exception e) {
             System.out.println("Error al guardar ítem por: " + e);
-            return "No se pudo registrar el item por error en la aplicación";
+            return false;
         }
     }
     
     @Override
     public String ConsultarExistenciaItem(Items item){
     
-        System.out.println("Conusltando existencia de item con id: " + item.getId());
+        System.out.println("Conusltando existencia de item con nombre: " + item.getNombre());
         try {
            if(repoItems.existsByNombre(item.getNombre())){
                 return "Ya existe el ítem!";
@@ -68,8 +67,8 @@ public class ItemsServicio implements ItemsServicioInterfaz {
        try {
           Items item = new Items();
           if(repoItems.UltimoItem().isPresent()){
-             System.out.println("Adquirido el último item");
              item = repoItems.UltimoItem().get();
+             System.out.println("Adquirido el último item");
              return item.getId();
           }else{
                System.out.println("No hay registros...");
@@ -78,6 +77,18 @@ public class ItemsServicio implements ItemsServicioInterfaz {
        } catch (Exception e) {
           System.out.println("No se pudo obtener el último ítem por error de la aplciación: " + e);
           return null;
+       }
+    }
+    
+    @Override
+    public boolean BorrarItem(String id){
+       System.out.println("Se borrará un ítem por falla en el registro de su compra!");
+       try {
+          repoItems.deleteById(id);
+          return true;
+       } catch (Exception e) {
+          System.out.println("Error al borrar ítem por: " + e);
+          return false;
        }
     }
 }
