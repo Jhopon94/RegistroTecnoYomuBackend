@@ -7,7 +7,9 @@ package com.registroTY.principal.repository;
 //////////////Esta interface nos evita escribir las sentencias sql ////////////////////
 
 import com.registroTY.principal.entities.Items;
+import jakarta.transaction.Transactional;
 import java.util.Optional;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -22,4 +24,12 @@ public interface ItemsRepo extends CrudRepository<Items, String>{ //Integer porq
     
     @Query(value = "SELECT * FROM items ORDER BY fechaCreacion DESC LIMIT 1", nativeQuery = true)
     Optional<Items> UltimoItem();
+    
+    @Query(value = "SELECT saldo FROM items WHERE id = ?1", nativeQuery = true)
+    int ObtenerSaldoItem(String id);
+    
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE items SET saldo = ?1 WHERE id = ?2", nativeQuery = true)
+    int NuevoSaldo(int saldo, String idItem);
 }

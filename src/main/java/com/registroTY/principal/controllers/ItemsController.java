@@ -11,7 +11,6 @@ import com.registroTY.principal.logica.gestionItems.RegistroItem;
 import com.registroTY.principal.services.EntradaItemServicioInterfaz;
 import com.registroTY.principal.services.ItemsServicioInterfaz;
 import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Valid;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;

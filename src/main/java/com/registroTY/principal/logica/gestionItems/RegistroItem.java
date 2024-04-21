@@ -38,7 +38,7 @@ public class RegistroItem {
         if(!ItemExiste()){
             EstablecerIDItem(servicioItem.findUltimoItem());
             if(servicioItem.GuardarItem(item)){
-               if(registroCompra.RegistrarCompra(entradaItem, servicioEntradaItem)){
+               if(registroCompra.RegistrarPrimeraCompra(entradaItem, servicioEntradaItem)){
                   return "Item y compra registrados correctamente!";
                }else{
                   if(servicioItem.BorrarItem(item.getId())) return "Se registró el ítem pero no la compra, por lo que se borró el ítem previamente registrado de forma automática!";

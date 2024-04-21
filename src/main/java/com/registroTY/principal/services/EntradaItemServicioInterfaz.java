@@ -20,4 +20,5 @@ public interface EntradaItemServicioInterfaz {
     
     List<Map<String, Object>> ListaCompras(LocalDate fechaInicio, LocalDate fechaFin);
     
+    boolean BorrarEntradaitem(int id);
 }

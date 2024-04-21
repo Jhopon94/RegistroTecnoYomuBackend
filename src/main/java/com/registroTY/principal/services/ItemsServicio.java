@@ -91,4 +91,40 @@ public class ItemsServicio implements ItemsServicioInterfaz {
           return false;
        }
     }
+    
+    @Override
+    public int ObtenerSaldoItem(String id){
+       System.out.println("Vamos a obtener el saldo del ítem...");
+       try {
+          return repoItems.ObtenerSaldoItem(id);
+       } catch (Exception e) {
+          System.out.println("No se pudo obtener el saldo del ítem por: " + e);
+          return -1;
+       }
+    }
+    
+    @Override
+    public boolean CambiarSaldoItem(int saldoNuevo, String id){
+       System.out.println("Actualizando el saldo del ítem en cuestión...");
+       try {
+            int respuesta = repoItems.NuevoSaldo(saldoNuevo, id); 
+             System.out.println("Se cambió el saldo satisfactoriamente en repo, y devolvió " + respuesta);
+             return true;
+       } catch (Exception e) {
+          System.out.println("Error al actualizar el saldo del ítem en cuestión por " + e);
+          return false;
+       }
+    }
+    
+    @Override
+    public boolean EliminarRegistroCompra(String id){
+       System.out.println("Vamos a eliminar el registro de compra...");
+       try {
+          repoItems.deleteById(id);
+          return true;
+       } catch (Exception e) {
+          System.out.println("Error al eliminar el registro de la compra por " + e);
+          return false;
+       }
+    }
 }

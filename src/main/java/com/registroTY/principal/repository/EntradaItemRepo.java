@@ -16,7 +16,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EntradaItemRepo extends CrudRepository<EntradaItem, String>{ //Integer porque el id es int
+public interface EntradaItemRepo extends CrudRepository<EntradaItem, Integer>{ //Integer porque el id es int
     
     @Query(value = "SELECT * FROM entradaItem ORDER BY fechaCompra DESC LIMIT 1", nativeQuery = true)
     Optional<EntradaItem> UltimaEntradaItem();

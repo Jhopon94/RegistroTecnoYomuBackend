@@ -75,4 +75,16 @@ public class EntradaItemServicio implements EntradaItemServicioInterfaz {
           return null;
        }
     }
+    
+    @Override
+    public boolean BorrarEntradaitem(int id){
+       System.out.println("Eliminaremos una compra registrada...");
+       try {
+          repoEntradaItem.deleteById(id);
+          return true;
+       } catch (Exception e) {
+          System.out.println("Error al eliminar el registro de la compra...");
+          return false;
+       }
+    }
 }

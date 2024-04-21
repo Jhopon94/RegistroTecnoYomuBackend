@@ -6,8 +6,6 @@ package com.registroTY.principal.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -37,6 +35,7 @@ public class Items {
     private String descripcion;
     @NotNull(message="Debe calcularse el saldo!")
     @PositiveOrZero
+    //Ojo que saldo también funciona para registrar la cantidad de items entrantes en una compra
     private Integer saldo;
     private Date fechaCreacion;
 }

@@ -20,4 +20,10 @@ public interface ItemsServicioInterfaz {
     String findUltimoItem();
     
     boolean BorrarItem(String id);
+    
+    int ObtenerSaldoItem(String id);
+    
+    boolean CambiarSaldoItem(int saldoNuevo, String id);
+    
+    boolean EliminarRegistroCompra(String id);
 }
