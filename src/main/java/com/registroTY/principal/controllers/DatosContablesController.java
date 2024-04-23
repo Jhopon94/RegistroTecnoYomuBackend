@@ -10,6 +10,7 @@ import com.registroTY.principal.entities.Items;
 import com.registroTY.principal.logica.gestionContable.ConsultaIngresos;
 import com.registroTY.principal.logica.gestionContable.ConsultarDeudores;
 import com.registroTY.principal.logica.gestionContable.RegistroCompraItem;
+import com.registroTY.principal.services.ClienteServicioInterfaz;
 import com.registroTY.principal.services.DetallesServicioInterfaz;
 import com.registroTY.principal.services.EntradaItemServicioInterfaz;
 import com.registroTY.principal.services.EquipoServicioInterfaz;
@@ -42,6 +43,8 @@ public class DatosContablesController {
    private EntradaItemServicioInterfaz servicioEntradaItem;
    @Autowired
    private ItemsServicioInterfaz servicioItems;
+   @Autowired
+   private ClienteServicioInterfaz servicioClientes;
 
    //Para el caso de deudores que nor equiere fecha, poner /deudores/0/0 en el front
    @GetMapping("/DatosContables/{peticionLista}/{fechaInicioString}/{fechaFinString}")
@@ -58,7 +61,7 @@ public class DatosContablesController {
                fechaInicioIngreso = LocalDate.parse(fechaInicioString, formateadorIngresos);
                fechaFinIngreso = LocalDate.parse(fechaFinString, formateadorIngresos);
                System.out.println("Fechas parseadas correctamente! inicio: " + fechaInicioIngreso + " fin: " + fechaFinIngreso);
-               return new ConsultaIngresos(fechaInicioIngreso, fechaFinIngreso, servicioDetalles).listaIngresos();
+               return new ConsultaIngresos(fechaInicioIngreso, fechaFinIngreso, servicioDetalles, servicioEquipo, servicioClientes).listaIngresos();
             } catch (Exception e) {
                System.out.println("No se pudiero parsear las fechas entrantes por: " + e);
                return null;

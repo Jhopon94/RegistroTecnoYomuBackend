@@ -19,4 +19,6 @@ public interface ClienteServicioInterfaz {
     int ClienteExiste(int id);
     
     int ObtenerServiciosTomados(int id);
+    
+    List<Cliente> EncontrarClientesPorIDS(List<Integer> ids);
 }

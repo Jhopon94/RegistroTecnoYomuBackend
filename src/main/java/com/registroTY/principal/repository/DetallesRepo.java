@@ -38,4 +38,10 @@ public interface DetallesRepo extends CrudRepository<Detalles, Integer>{ //Integ
     
     @Query(value = "SELECT id FROM detalles WHERE idEquipo=?1", nativeQuery = true)
     List<Integer> DetallesIDS(String idEquipo);
+    
+    @Query(value = "SELECT * FROM detalles WHERE fechaRegistro BETWEEN ?1 AND ?2", nativeQuery = true)
+    List<Detalles> ListaDetallesRango(LocalDate fechaInicial, LocalDate fechaFinal);
+    
+     @Query(value = "SELECT * FROM detalles WHERE fechaRegistro BETWEEN ?1 AND ?2 AND idEquipo IN ?3", nativeQuery = true)
+    List<Detalles> ListaDetallesIDEquipo(LocalDate fechaInicial, LocalDate fechaFinal,List<String> idsEquipo);
 }

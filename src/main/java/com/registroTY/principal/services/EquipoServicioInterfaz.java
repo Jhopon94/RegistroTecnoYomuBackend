@@ -36,4 +36,7 @@ public interface EquipoServicioInterfaz {
     
     String CambiarEstadoEquipo(String estado, String id);
     
+    List<Equipo> ListaEquipoRangoPagaron(LocalDate fechaInicial, LocalDate fechaFinal);
+    
+    List<Equipo> ListaEquipoRango(LocalDate fechaInicial, LocalDate fechaFinal);
 }

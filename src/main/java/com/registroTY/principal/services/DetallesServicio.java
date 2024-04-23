@@ -34,10 +34,10 @@ public class DetallesServicio implements DetallesServicioInterfaz {
    }
 
    @Override
-   public List<Map<String, Object>> ListaDetallesRango(LocalDate startDate, LocalDate endDate) {
+   public List<Detalles> ListaDetallesRango(LocalDate startDate, LocalDate endDate) {
       System.out.println("Consultando lista de detalles por rango de fecha...");
       try {
-         return repoDetalles.listaIngresosRaw(startDate, endDate);
+         return repoDetalles.ListaDetallesRango(endDate, endDate);
       } catch (Exception e) {
          System.out.println("No se pudo obtener la lista de detalles por rango por error en aplciación por : " + e);
          return null;
@@ -113,6 +113,17 @@ public class DetallesServicio implements DetallesServicioInterfaz {
          return repoDetalles.DetallesIDS(idEquipo);
       } catch (Exception e) {
          System.out.println("Error al obtener la lsita de los ids de los detalles del equipo por: " + e);
+         return null;
+      }
+   }
+   
+   @Override
+   public List<Detalles>ListaDetallesIDEquipo(LocalDate fechaInicial, LocalDate fechaFinal,List<String> idEquipo){
+      System.out.println("Obteniendo la lsita de detalles según el id del euipo y el rango de fecha...");
+      try {
+         return repoDetalles.ListaDetallesIDEquipo(fechaInicial, fechaFinal, idEquipo);
+      } catch (Exception e) {
+         System.out.println("error al obtener  la lista de detalles según el id del euipo y el rango de fecha " + e);
          return null;
       }
    }

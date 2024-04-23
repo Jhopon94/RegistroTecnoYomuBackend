@@ -5,14 +5,10 @@
 package com.registroTY.principal.entities;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;
 import java.util.Date;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -30,10 +26,9 @@ public class TipoItem {
     
     @Id
     private String id;
-    private String idEntradaItem;
     @NotBlank(message="Debe especificarse el tipo de item!")
     @Column(unique = true)
-    @Pattern(regexp = "\\S+", message = "El nombre de uusario no debe llevar espacios")
+    @Pattern(regexp = "\\S+", message = "El tipoItem no debe llevar espacios")
     private String tipoDeItem;
     private Date fechaCreacion;
 }

@@ -84,4 +84,15 @@ public class ClienteServicio implements ClienteServicioInterfaz {
           return -1;
        }
     }
+    
+    @Override
+    public List<Cliente> EncontrarClientesPorIDS(List<Integer> ids){
+       System.out.println("Encontrando lista de clientes por id...");
+       try {
+          return repoCliente.findByIdIn(ids);
+       } catch (Exception e) {
+          System.out.println("No se pudo obtener lsita de clientes por id por: " + e);
+          return null;
+       }
+    }
 }

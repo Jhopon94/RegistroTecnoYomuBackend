@@ -32,7 +32,7 @@ public class TipoItemController {
     @PostMapping("/TiposItem")
     public String GuardarTipoItem(@Valid @RequestBody TipoItem tipoItem, BindingResult resultado){
     
-        if(resultado.hasErrors()) return "Error en los datos ingresados, intenta poner nombre de usuario sin espacios.";
+        if(resultado.hasErrors()) return "Error en los datos ingresados, intenta poner nombre del tipoItem sin espacios.";
         return new RegistroTipoItem(servicioTipoItem, tipoItem).RegistrarTipoItem();
     }
 }

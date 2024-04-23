@@ -56,4 +56,10 @@ public interface EquipoRepo extends CrudRepository<Equipo, String>{ //Integer po
     @Query(value = "UPDATE equipo SET estadoEquipo = ?1 WHERE id=?2", nativeQuery = true)
     void CambiarEstado(String estado, String id);
     
+    @Query(value = "SELECT * FROM equipo WHERE fechaSalida BETWEEN ?1 AND ?2", nativeQuery = true)
+    List<Equipo> ListaEquiposRango(LocalDate fechaInicial, LocalDate fechaFinal);
+    
+    @Query(value = "SELECT * FROM equipo WHERE fechaSalida BETWEEN ?1 AND ?2 AND fechaSalida IS NOT NULL", nativeQuery = true)
+    List<Equipo> ListaEquiposRangoPagaron(LocalDate fechaInicial, LocalDate fechaFinal);
+    
 }

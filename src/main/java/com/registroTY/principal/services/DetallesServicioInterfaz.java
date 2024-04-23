@@ -14,7 +14,7 @@ public interface DetallesServicioInterfaz {
     
     List<Detalles> ListaDetalles(String id);
     
-    List<Map<String, Object>> ListaDetallesRango(LocalDate startDate, LocalDate endDate);
+    List<Detalles> ListaDetallesRango(LocalDate startDate, LocalDate endDate);
     
     void EliminarDetalle(int id);
     
@@ -27,5 +27,7 @@ public interface DetallesServicioInterfaz {
     List<Map<String, Object>> DetallesEquipoAdeudado(String id);
     
     List<Integer> ListaDetallesIDS(String idEquipo);
+    
+    List<Detalles>ListaDetallesIDEquipo(LocalDate fechaInicial, LocalDate fechaFinal,List<String> idEquipo);
     
 }

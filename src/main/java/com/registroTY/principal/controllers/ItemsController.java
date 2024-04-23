@@ -68,15 +68,65 @@ public class ItemsController {
          } else if (!errorEntradaItem.isEmpty()) {
             return "Error en los datos del objeto entradaItem!";
          } else {
-            System.out.println("vamos a gaurdar al item " + item.getNombre() + " y a la entradaItem con precio total de: " + entradaItem.getPrecioTotal());
+            System.out.println("vamos a guardar al item " + item.getNombre() + " y a la entradaItem con precio total de: " + entradaItem.getPrecioTotal());
             return new RegistroItem(servicioItems, servicioEntradaitem, item, entradaItem).RegistrarItem();
          }
       }
    }
 
-   @PutMapping("/Items")
+   @PutMapping("/ItemOff")
    public String SalidaItemReparador(@Valid @RequestBody SalidaItem salidaItem, BindingResult resultado) {
-      if(resultado.hasErrors()) return "Error en los datos de la salida del ítem! por : " + resultado;
-      else return new RegistroSalidaItem(servicioItems, servicioSalidaItem, salidaItem).RegistrarUsoItem();
+      if (resultado.hasErrors()) {
+         return "Error en los datos de la salida del ítem! por : " + resultado;
+      } else {
+         return new RegistroSalidaItem(servicioItems, servicioSalidaItem, salidaItem).RegistrarUsoItem();
+      }
    }
+
+   @PutMapping("/ItemPlus")
+   public String NuevaCompraItem(@RequestBody Map<String, Object> detalles, BindingResult resultado) {
+      if (resultado.hasErrors()) {
+         return "Error en los datos ingresados!";
+      } else {
+         String idItem = detalles.get("id").toString();
+         int cantidadCompra = Integer.parseInt(detalles.get("cantidad").toString());
+         int saldoActual = servicioItems.ObtenerSaldoItem(idItem);
+         int precioTotal = Integer.parseInt(detalles.get("precioTotal").toString());
+         int costoUnitario = Integer.parseInt(detalles.get("costoUnitario").toString());
+
+         if (saldoActual >= 0) {
+            try {
+               servicioItems.CambiarSaldoItem(saldoActual + cantidadCompra, idItem);
+               System.out.println("Saldo modificado con éxito");
+               EntradaItem entradaItem = new EntradaItem();
+               entradaItem.setIdItem(idItem);
+               entradaItem.setCantidad(cantidadCompra);
+               entradaItem.setCostoUnitario(costoUnitario);
+               entradaItem.setPrecioTotal(precioTotal);
+               if (servicioEntradaitem.GuardarEntradaItem(entradaItem)) {
+                  return "Éxito al cambiar el saldo del ítem y al registrar la compra!";
+               } else {
+                  return "El sald del ítem se cambió, pero no se registró la compra!";
+               }
+            } catch (Exception e) {
+               System.out.println("Error al registrar la compra y al editar el saldo del ítem por: " + e);
+               return "Error al registrar la compra y al editar el saldo del ítem";
+            }
+
+         } else {
+            return "Error al modificar el saldo";
+         }
+      }
+   }
+
+   @PutMapping("/ItemEdit")
+   public String EditarItem(@Valid @RequestBody Items item, BindingResult resultado){
+      if(resultado.hasErrors()){
+         return "Error en los datos enviados";
+      }else{
+         servicioItems.GuardarItem(item);
+         return "Ítem editado con éxito!";
+      }
+   }
+
 }
