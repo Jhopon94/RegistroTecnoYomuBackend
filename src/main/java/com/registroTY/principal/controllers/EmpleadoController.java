@@ -5,6 +5,7 @@
 package com.registroTY.principal.controllers;
 
 import com.registroTY.principal.entities.Empleado;
+import com.registroTY.principal.logica.gestionEmpleados.EdicionEmpleado;
 import com.registroTY.principal.logica.gestionEmpleados.RegistroEmpleado;
 import com.registroTY.principal.services.EmpleadoServicioInterfaz;
 import jakarta.validation.Valid;
@@ -26,14 +27,13 @@ public class EmpleadoController {
     
     @GetMapping("/Empleados")
     public List<Empleado> ListaEmpleados(){
-        
         return servicioEmpleado.ListaEmpleados();
     }
     
     @PutMapping("/Empleados")
     public String ActualizarEmpleado(@Valid @RequestBody Empleado empleado, BindingResult resultado){
         if(resultado.hasErrors()) return "Error al editar, revisa bien la información ingresada!";
-        else return servicioEmpleado.GuardarEmpleado(empleado);
+        else return new EdicionEmpleado(servicioEmpleado).EditarEmpleado(empleado);
     }
     
     @PostMapping("/Empleados")
@@ -45,6 +45,10 @@ public class EmpleadoController {
             RegistroEmpleado registrarEmpleado = new RegistroEmpleado(empleado, servicioEmpleado);
             return registrarEmpleado.RegistrarEmpleado();
         }
-        
+    }
+    
+    @PutMapping("/EmpleadoOff")
+    public String DesactivarEmpleado(@RequestBody int id, BindingResult resultado){
+       return servicioEmpleado.DesactivarEmpleado(id);
     }
 }

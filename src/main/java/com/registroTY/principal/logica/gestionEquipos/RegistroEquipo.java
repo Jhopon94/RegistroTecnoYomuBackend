@@ -40,6 +40,9 @@ public class RegistroEquipo {
         
         //Establecemos el id
         EstablecerIdEquipo(servicioEquipo.UltimoIDEquipo());
+        //Estableceer estadoEquipo y DiasGarantía
+        equipo.setDiasGarantia(0);
+        equipo.setEstadoEquipo("Ingresado");
         //Obtenemos los resultados de registrar equipo
         Map<String, Object> resultadoEquipo = servicioEquipo.GuardarEquipo(equipo);
         //Solo se registrarán los detalles si se tuvo éxito registrando el equipo

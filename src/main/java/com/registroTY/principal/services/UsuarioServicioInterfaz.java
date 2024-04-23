@@ -18,4 +18,7 @@ public interface UsuarioServicioInterfaz {
     String GuardarUsuario(Usuario usuario);
     
     String ConsultarUsuarioExiste(Usuario usuario);
+    
+    int UsuarioExiste(int idEmpleado);
+    
 }

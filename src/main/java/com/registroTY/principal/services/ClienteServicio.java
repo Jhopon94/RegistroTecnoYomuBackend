@@ -61,4 +61,27 @@ public class ClienteServicio implements ClienteServicioInterfaz {
                 return "No se encontró cliente por error en aplicación!";
         }
     }
+    
+    @Override
+    public int ClienteExiste(int id){
+       System.out.println("Buscando si el cliente en cuestión existe!");
+       try {
+          if(repoCliente.existsById(id)) return 1;
+          else return 0;
+       } catch (Exception e) {
+          System.out.println("Error al verificar la existencia del cliente por: " + e);
+          return -1;
+       }
+    }
+    
+    @Override
+    public int ObtenerServiciosTomados(int id){
+       System.out.println("Obteniendo servicios tomados del cliente...");
+       try {
+          return repoCliente.ServiciosTomados(id);
+       } catch (Exception e) {
+          System.out.println("Error al obtener los servicios tomados del cliente por: " + e);
+          return -1;
+       }
+    }
 }

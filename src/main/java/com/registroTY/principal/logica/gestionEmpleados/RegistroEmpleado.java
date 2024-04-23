@@ -26,6 +26,7 @@ public class RegistroEmpleado {
         //Primero checamos que no exista
         if(!EmpleadoExiste()){
             empleado.setActivo(true); //Se marca como activo cuando se registra el empleado por primera vez
+            empleado.setDisponibleParaUsuario(true);//se marca activo también
             return servicioEmpleado.GuardarEmpleado(empleado);
         }
             

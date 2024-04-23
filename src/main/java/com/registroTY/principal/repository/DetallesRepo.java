@@ -33,4 +33,9 @@ public interface DetallesRepo extends CrudRepository<Detalles, Integer>{ //Integ
     @Query(value = "SELECT d.descripcion, d.precio FROM detalles d INNER JOIN equipo e ON e.id = d.idEquipo "
             + "WHERE e.id = ?1", nativeQuery = true)
     List<Map<String, Object>> ListaDetallesDeudor(String id);
+    
+    List<Detalles> findAllByIdEquipo(String idEquipo);
+    
+    @Query(value = "SELECT id FROM detalles WHERE idEquipo=?1", nativeQuery = true)
+    List<Integer> DetallesIDS(String idEquipo);
 }

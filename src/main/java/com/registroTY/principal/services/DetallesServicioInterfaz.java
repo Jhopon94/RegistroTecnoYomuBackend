@@ -6,15 +6,13 @@ package com.registroTY.principal.services;
 
 import com.registroTY.principal.entities.Detalles;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 ///////Este interfaz es solo para que se vea mas ordenado y bonito ////////////
 public interface DetallesServicioInterfaz {
     
-    List<Detalles> ListaDetalles();
+    List<Detalles> ListaDetalles(String id);
     
     List<Map<String, Object>> ListaDetallesRango(LocalDate startDate, LocalDate endDate);
     
@@ -27,4 +25,7 @@ public interface DetallesServicioInterfaz {
     String EliminarVariosDetalles(List<Integer> lista);
     
     List<Map<String, Object>> DetallesEquipoAdeudado(String id);
+    
+    List<Integer> ListaDetallesIDS(String idEquipo);
+    
 }

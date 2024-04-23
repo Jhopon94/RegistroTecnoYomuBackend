@@ -127,7 +127,7 @@ public class EquipoServicio implements EquipoServicioInterfaz {
           return repoEquipo.SaldoPendiente(id);
        } catch (Exception e) {
           System.out.println("Error al obtener el saldo pendiente de " + id + " por: " + e);
-          return 333;//solo apra devolver algo e informar que hubo error
+          return -1;//solo apra devolver algo e informar que hubo error
        }
     }
     

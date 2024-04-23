@@ -47,7 +47,6 @@ public class Cliente {
     
     private Date fechaRegistro;
     
-    @NotNull
     @PositiveOrZero
     private Integer serviciosTomados;
 }

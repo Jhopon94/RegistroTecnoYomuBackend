@@ -77,4 +77,16 @@ public class UsuarioServicio implements UsuarioServicioInterfaz {
             return "No se encontró usuario por error en aplicación";
         }
     }
+    
+    @Override
+    public int UsuarioExiste(int idEmpleado){
+       System.out.println("Consultando existencia de Usuario");
+       try {
+          if (repoUsuario.existsById(idEmpleado)) return 1;
+          else return 0;
+       } catch (Exception e) {
+          System.out.println("No se pudo verificar la existencia del  usuario");
+          return -1;
+       }
+    }
 }

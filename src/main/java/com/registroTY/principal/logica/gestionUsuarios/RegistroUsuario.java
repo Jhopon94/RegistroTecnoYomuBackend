@@ -4,8 +4,6 @@
  */
 package com.registroTY.principal.logica.gestionUsuarios;
 
-import com.registroTY.principal.entities.Cliente;
-import com.registroTY.principal.entities.Empleado;
 import com.registroTY.principal.entities.Usuario;
 import com.registroTY.principal.services.UsuarioServicioInterfaz;
 

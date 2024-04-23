@@ -43,14 +43,13 @@ public class Equipo {
     
     private String daniosRecibido;
     
-    @NotBlank(message="Debe especificarse las aprtes internas con que ingresa!")
+    @NotBlank(message="Debe especificarse las partes internas con que ingresa!")
     private String partesInternasRecibido;
     
     @NotNull(message="Debe calcularse el total!")
     @PositiveOrZero
     private Integer precioTotal;
     
-    @NotBlank(message="Debe especificarse el estado del equipo!")
     private String estadoEquipo;
     
     @NotNull(message="Debe especificarse el saldo pendiente!")
@@ -61,7 +60,6 @@ public class Equipo {
     
     private Date fechaSalida;
     
-    @NotNull
     @PositiveOrZero
     private Integer diasGarantia;
     

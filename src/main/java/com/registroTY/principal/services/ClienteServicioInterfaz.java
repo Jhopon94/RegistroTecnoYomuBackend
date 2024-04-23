@@ -15,4 +15,8 @@ public interface ClienteServicioInterfaz {
     String GuardarCliente(Cliente cliente);
     
     String ConsultarCliente(Cliente cliente);
+    
+    int ClienteExiste(int id);
+    
+    int ObtenerServiciosTomados(int id);
 }

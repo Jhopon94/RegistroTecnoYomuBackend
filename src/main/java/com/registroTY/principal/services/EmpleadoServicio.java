@@ -34,7 +34,7 @@ public class EmpleadoServicio implements EmpleadoServicioInterfaz {
 
     @Override
     public String GuardarEmpleado(Empleado empleado) {
-        System.out.println("Guardando empleado...");
+        System.out.println("Guardando empleado... con disponibilidad: " + empleado.getDisponibleParaUsuario());
         try {
         repoEmpleado.save(empleado);
         return empleado.getNombre() + " registrado como empleado satisfactoriamente!";
@@ -57,5 +57,43 @@ public class EmpleadoServicio implements EmpleadoServicioInterfaz {
             System.out.println("No se encontró empleado por error en base de datos : " + e);
                 return "No se encontró el empleado por error en aplicación!";
         }
+    }
+    
+    @Override
+    public String DesactivarEmpleado(int id){
+       System.out.println("Vamos a desactivar el empleado...");
+       try {
+          repoEmpleado.MarcarInactivo(id);
+          return "Empleado desactivado satisfactoriamente!";
+       } catch (Exception e) {
+          System.out.println("Error al desactivar empleado por...");
+          return "Error al desactivar empleado!";
+       }
+    }
+    
+    @Override
+    public boolean ConsultarExistencia(int id){
+       System.out.println("Consultando si el empleado existe por su cédula...");
+       try {
+          repoEmpleado.findById(id);
+          return true;
+       } catch (Exception e) {
+          System.out.println("No se encontró el empleado!");
+          return false;
+       }
+    }
+    
+    @Override
+    public Empleado ObtenerEmpleado(int id){
+       System.out.println("Obteniendo objeto empleado...");
+       try {
+          Empleado empleadoAux = new Empleado();
+          empleadoAux = repoEmpleado.findById(id).get();
+          if(empleadoAux instanceof Empleado) return empleadoAux;
+          else return null;
+       } catch (Exception e) {
+          System.out.println("Error al obtener el empleado por: " + e);
+          return null;
+       }
     }
 }

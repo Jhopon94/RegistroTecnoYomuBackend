@@ -5,6 +5,7 @@
 package com.registroTY.principal.controllers;
 
 import com.registroTY.principal.entities.Usuario;
+import com.registroTY.principal.logica.gestionUsuarios.EditarUsuario;
 import com.registroTY.principal.logica.gestionUsuarios.RegistroUsuario;
 import com.registroTY.principal.services.UsuarioServicioInterfaz;
 import jakarta.validation.Valid;
@@ -22,36 +23,47 @@ import org.springframework.web.bind.annotation.RestController;
 //////Controlador Principal del ojeto Usuario////////////////////
 @RestController
 public class UsuarioController {
-    
-    @Autowired
-    private UsuarioServicioInterfaz servicioUsuario;
-    
-    @GetMapping("/Usuarios")
-    public List<Usuario> ListaUsuario(){
-        
-        return servicioUsuario.ListaUsuarios();
-    }
-    
-    @PutMapping("/Usuarios")
-    public String ActualizarUsuario(@Valid @RequestBody Usuario usuario, BindingResult resultado){
-        if(resultado.hasErrors()) return "Error al actualziar suuario, revisa que los datos sean correctos!";
-        else return servicioUsuario.GuardarUsuario(usuario);
-    }
-    
-    @PostMapping("/Usuarios")
-    public String GuardarUsuario(@Valid @RequestBody Usuario usuario, BindingResult resultado){
-    
-        if(resultado.hasErrors()){
-            return "Hay algún dato incorrecto, recuerda que el nombre de usaurio no debe llevar espacios!";
-        }else{
-            RegistroUsuario registrarUsuario = new RegistroUsuario(usuario, servicioUsuario);
-            return registrarUsuario.RegistrarUsuario();
-        }
-    }
-    
-    @DeleteMapping("/Usuarios/{id}")
-    public String EliminarUsuario(@PathVariable int id){
-    
-        return servicioUsuario.EliminarUsuario(id);
-    }
+
+   @Autowired
+   private UsuarioServicioInterfaz servicioUsuario;
+
+   @GetMapping("/Usuarios")
+   public List<Usuario> ListaUsuario() {
+
+      return servicioUsuario.ListaUsuarios();
+   }
+
+   @PutMapping("/Usuarios")
+   public String ActualizarUsuario(@Valid @RequestBody Usuario usuario, BindingResult resultado) {
+      if (resultado.hasErrors()) {
+         return "Error al actualizar usuario, revisa que los datos sean correctos!";
+      } else {
+         return new EditarUsuario(servicioUsuario).EditarUsuario(usuario);
+      }
+   }
+
+   @PostMapping("/Usuarios")
+   public String GuardarUsuario(@Valid @RequestBody Usuario usuario, BindingResult resultado) {
+
+      if (resultado.hasErrors()) {
+         return "Hay algún dato incorrecto, recuerda que el nombre de usaurio no debe llevar espacios!";
+      } else {
+         RegistroUsuario registrarUsuario = new RegistroUsuario(usuario, servicioUsuario);
+         return registrarUsuario.RegistrarUsuario();
+      }
+   }
+
+   @DeleteMapping("/Usuarios/{id}")
+   public String EliminarUsuario(@PathVariable int id) {
+
+      int verificacion = servicioUsuario.UsuarioExiste(id);
+      switch (verificacion) {
+         case 1:
+            return servicioUsuario.EliminarUsuario(id);
+         case 0:
+            return "No existe usuario para eliminar!";
+         default:
+            return "Error de backen al eliminar el usaurio";
+      }
+   }
 }
