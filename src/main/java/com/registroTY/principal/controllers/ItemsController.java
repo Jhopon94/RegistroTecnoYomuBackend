@@ -120,12 +120,22 @@ public class ItemsController {
    }
 
    @PutMapping("/ItemEdit")
-   public String EditarItem(@Valid @RequestBody Items item, BindingResult resultado){
-      if(resultado.hasErrors()){
+   public String EditarItem(@Valid @RequestBody Items item, BindingResult resultado) {
+      if (resultado.hasErrors()) {
          return "Error en los datos enviados";
-      }else{
-         servicioItems.GuardarItem(item);
-         return "Ítem editado con éxito!";
+      } else {
+         int resultadoExistencia = servicioItems.ConsuoltarExistenciaPorID(item.getId());
+         switch (resultadoExistencia) {
+            case 1:
+               servicioItems.GuardarItem(item);
+               return "Ítem editado con éxito!";
+            case 0:
+               return "Este ítem no existe, por ende no se puede editar!";
+            case -1:
+               return "Error al consultar la existencia del ítem por su id!";
+            default:
+               throw new AssertionError();
+         }
       }
    }
 

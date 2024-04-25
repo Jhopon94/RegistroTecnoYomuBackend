@@ -127,4 +127,16 @@ public class ItemsServicio implements ItemsServicioInterfaz {
           return false;
        }
     }
+    
+    @Override
+    public int ConsuoltarExistenciaPorID(String id){
+       System.out.println("Averiguando si el ítem en cuestión existe pero por id apra poder editarlo!");
+       try {
+          if(repoItems.existsById(id)) return 1;
+          else return 0;
+       } catch (Exception e) {
+          System.out.println("Error al buscar el ítem por id por: " + e);
+          return -1;
+       }
+    }
 }

@@ -26,4 +26,6 @@ public interface ItemsServicioInterfaz {
     boolean CambiarSaldoItem(int saldoNuevo, String id);
     
     boolean EliminarRegistroCompra(String id);
+    
+    int ConsuoltarExistenciaPorID(String id);
 }

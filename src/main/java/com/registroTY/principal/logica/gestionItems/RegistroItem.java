@@ -38,6 +38,8 @@ public class RegistroItem {
         if(!ItemExiste()){
             EstablecerIDItem(servicioItem.findUltimoItem());
             if(servicioItem.GuardarItem(item)){
+               //Se le otorga idItem a la entradaitem
+               entradaItem.setIdItem(item.getId());
                if(registroCompra.RegistrarPrimeraCompra(entradaItem, servicioEntradaItem)){
                   return "Item y compra registrados correctamente!";
                }else{
